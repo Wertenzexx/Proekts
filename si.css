@@ -1,0 +1,361 @@
+/* Общие стили */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;       /* Центрируем по горизонтали */
+    align-items: center;           /* Центрируем по вертикали */
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+.container {
+    width: 100%;
+    max-width: 480px;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+/* Формы */
+.auth-form {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+.auth-form h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #283618;
+    font-weight: 600;
+    font-size: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease-in-out;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #588157;
+    box-shadow: 0 0 0 0.2rem rgba(88, 129, 87, 0.25);
+}
+
+/* Кнопки */
+.auth-form button[type="submit"] {
+    background-color: #588157;
+    color: white;
+    padding: 0.875rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.125rem;
+    width: 100%;
+    transition: background-color 0.3s ease;
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.auth-form button[type="submit"]:hover {
+    background-color: #3d5a38;
+}
+
+/* Сообщения */
+.error-message {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: none;
+    text-align: left;       /* Выравниваем текст ошибки слева */
+}
+
+.auth-message {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 4px;
+    display: none;
+}
+
+.auth-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.auth-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Ссылки */
+.auth-links {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.auth-links a {
+    color: #007bff;
+    text-decoration: none;
+    margin: 0 0.75rem;
+    transition: color 0.2s ease-in-out;
+}
+
+.auth-links a:hover {
+    color: #0056b3;
+}
+
+/* Ссылки соцсетей (стилизованные под кнопки) */
+.auth-links a[id$="LoginLink"] {
+    display: inline-block;
+    padding: 0.75rem 1.25rem;
+    background-color: #588157;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    margin: 0.25rem;
+    font-weight: 500;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.auth-links a[id$="LoginLink"]:hover {
+    background-color: #3d5a38;
+}
+
+/* Адаптивные стили */
+@media (max-width: 576px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .auth-form {
+        padding: 1.5rem;
+    }
+
+    .auth-form h2 {
+        font-size: 1.75rem;
+    }
+
+    .form-group label {
+        font-size: 0.875rem;
+    }
+
+    .form-group input {
+        font-size: 0.9rem;
+    }
+
+    .auth-form button[type="submit"],
+    .auth-links a[id$="LoginLink"] {
+        font-size: 1rem;
+        padding: 0.75rem 1.25rem;
+    }
+}
+/* Общие стили */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+.container {
+    width: 100%;
+    max-width: 480px;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+/* Формы */
+.auth-form {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+.auth-form h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #283618;
+    font-weight: 600;
+    font-size: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease-in-out;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #588157;
+    box-shadow: 0 0 0 0.2rem rgba(88, 129, 87, 0.25);
+}
+
+/* Кнопки */
+.auth-form button[type="submit"] { /* Кнопка "Войти" и "Зарегистрироваться" */
+    background-color: #588157;
+    color: white;
+    padding: 0.875rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.125rem;
+    width: 100%;            /* Занимает всю ширину */
+    transition: background-color 0.3s ease;
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    display: block;         /* Отображаем как блочный элемент */
+    text-align: center;     /* Выравниваем текст по центру */
+}
+
+.auth-form button[type="submit"]:hover {
+    background-color: #3d5a38;
+}
+
+/* Сообщения */
+.error-message {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: none;
+    text-align: left;
+}
+
+.auth-message {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 4px;
+    display: none;
+}
+
+.auth-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.auth-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Ссылки */
+.auth-links {
+    text-align: center;
+    margin-top: 1.5rem;
+    display: flex;           /* Используем flexbox для выравнивания */
+    flex-direction: column; /* Размещаем элементы в колонку */
+    align-items: center;     /* Центрируем элементы по горизонтали */
+}
+
+.auth-links a {
+    color: #007bff;
+    text-decoration: none;
+    margin: 0.25rem 0;     /* Отступы сверху и снизу */
+    transition: color 0.2s ease-in-out;
+    display: block;         /* Отображаем как блочный элемент */
+    width: 100%;            /* Занимает всю ширину */
+    text-align: center;     /* Выравниваем текст по центру */
+    padding: 0.75rem;       /* Добавляем внутренний отступ */
+    box-sizing: border-box; /* Учитываем padding в общей ширине */
+}
+
+.auth-links a:hover {
+    color: #0056b3;
+}
+
+/* Ссылки соцсетей (стилизованные под кнопки) */
+.auth-links a[id$="LoginLink"] {
+    background-color: #588157;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    font-weight: 500;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.auth-links a[id$="LoginLink"]:hover {
+    background-color: #3d5a38;
+}
+
+/* Адаптивные стили */
+@media (max-width: 576px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .auth-form {
+        padding: 1.5rem;
+    }
+
+    .auth-form h2 {
+        font-size: 1.75rem;
+    }
+
+    .form-group label {
+        font-size: 0.875rem;
+    }
+
+    .form-group input {
+        font-size: 0.9rem;
+    }
+
+    .auth-form button[type="submit"],
+    .auth-links a[id$="LoginLink"] {
+        font-size: 1rem;
+        padding: 0.75rem 1.25rem;
+    }
+}

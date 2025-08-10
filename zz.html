@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Авторизация и регистрация</title>
+    <link rel="stylesheet" href="style2222.css">
+    <link rel="stylesheet" href="si.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="auth-form" id="loginFormContainer">
+            <h2>Авторизация</h2>
+
+            <!-- Форма авторизации -->
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginUsername">Имя пользователя:</label>
+                    <input type="text" id="loginUsername" name="loginUsername" required>
+                    <div class="error-message" id="loginUsernameError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword">Пароль:</label>
+                    <input type="password" id="loginPassword" name="loginPassword" required>
+                    <div class="error-message" id="loginPasswordError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="loginCode">Код:</label>
+                    <input type="text" id="loginCode" name="loginCode" required>
+                    <div class="error-message" id="loginCodeError"></div>
+                </div>
+
+                <button type="submit">Войти</button>
+
+                <div class="auth-links">
+                    <a href="https://vk.com/feed" id="vkLoginLink" class="vk btn">Войти через VK</a>
+                    <a href="https://web.telegram.org/a/#5322384257" id="tgLoginLink"  class="telegram btn">Войти через Telegram</a>
+                    <a href="https://www.google.kz" id="googleLoginLink" class="google btn">Войти через Google</a>
+                    <a href="#" id="getCodeButton">Получить код</a>
+                    <a href="#" id="forgotPasswordLink">Забыли пароль?</a>
+                    <a href="#" id="showRegisterFormLink">Регистрация</a>
+                </div>
+            </form>
+        </div>
+
+        <div class="auth-form" id="registerFormContainer" style="display: none;">
+            <h2>Регистрация</h2>
+
+            <!-- Форма регистрации -->
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="registerUsername">Имя пользователя:</label>
+                    <input type="text" id="registerUsername" name="registerUsername" required>
+                    <div class="error-message" id="registerUsernameError"></div>
+                </div>
+                                <div class="form-group">
+                    <label for="registerPassword">Пароль:</label>
+                    <input type="password" id="registerPassword" name="registerPassword" required>
+                    <div class="error-message" id="registerPasswordError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Подтвердите пароль:</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    <div class="error-message" id="confirmPasswordError"></div>
+                </div>
+
+                <button type="submit">Зарегистрироваться</button>
+
+                <div class="auth-links">
+                    <a href="#" id="showLoginFormLink">Авторизация</a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Сообщение об ошибке/успехе -->
+        <div id="authMessage" class="auth-message"></div>
+
+         <!-- Модальное окно блокировки -->
+         <div class="modal" id="lockoutModal" tabindex="-1" role="dialog" style="display: none;">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Аккаунт заблокирован</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>Вы превысили допустимое количество попыток входа. Попробуйте позже.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+       
+    </script>
+   <script src="script4.js"></script>
+    <script src="code (11).js"></script>
+    <script src="code (12).js"></script>
+    <script src="code (10).js"></script>
+
+</body>
+</html>

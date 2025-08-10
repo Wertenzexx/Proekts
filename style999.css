@@ -1,0 +1,87 @@
+#profile {
+  max-width: 500px;
+  margin: 20px auto 40px;
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#profile h2 {
+  margin-bottom: 25px;
+  font-size: 28px;
+  color: #333;
+  text-align: center;
+  font-weight: 600;
+}
+
+#profile form label {
+  display: block;
+  margin-bottom: 15px;
+  font-weight: 600;
+  color: #555;
+  font-size: 16px;
+}
+
+#profile form input[type="text"],
+#profile form input[type="email"],
+#profile form input[type="tel"] {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 16px;
+  border: 1.8px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+#profile form input[type="text"]:focus,
+#profile form input[type="email"]:focus,
+#profile form input[type="tel"]:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 8px rgba(0,123,255,0.3);
+}
+
+#profile form input[disabled] {
+  background-color: #e9ecef;
+  color: #6c757d;
+  cursor: not-allowed;
+}
+
+#profile form button[type="submit"] {
+  width: 100%;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 12px 0;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+#profile form button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* Адаптив для мобильных */
+@media (max-width: 600px) {
+  #profile {
+    padding: 20px 15px;
+    margin: 15px 10px 30px;
+  }
+
+  #profile h2 {
+    font-size: 24px;
+  }
+
+  #profile form button[type="submit"] {
+    font-size: 16px;
+    padding: 10px 0;
+  }
+}
+

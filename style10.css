@@ -1,0 +1,132 @@
+ body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            margin: 30px;
+            color: #444;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 10px;
+            padding: 25px 30px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        thead {
+            background-color: #3498db;
+            color: white;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        tbody tr:hover {
+            background-color: #f1f7ff;
+        }
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+        }
+        .quantity-controls button {
+            background-color: #3498db;
+            border: none;
+            color: white;
+            font-weight: bold;
+            width: 28px;
+            height: 28px;
+            border-radius: 4px;
+            cursor: pointer;
+            user-select: none;
+            margin: 0 5px;
+            transition: background-color 0.2s;
+        }
+        .quantity-controls button:hover {
+            background-color: #2980b9;
+        }
+        .quantity-controls input {
+            width: 50px;
+            text-align: center;
+            font-size: 16px;
+            padding: 4px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button.remove-btn {
+            background-color: #e74c3c;
+            border: none;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button.remove-btn:hover {
+            background-color: #c0392b;
+        }
+        #clear-cart {
+            background-color: #95a5a6;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            float: right;
+                        margin-bottom: 10px;
+            transition: background-color 0.3s;
+        }
+        #clear-cart:hover {
+            background-color: #7f8c8d;
+        }
+        .total-price {
+            font-size: 22px;
+            font-weight: 700;
+            text-align: right;
+            margin-top: 15px;
+            color: #27ae60;
+        }
+        .empty-cart {
+            text-align: center;
+            padding: 40px 0;
+            font-style: italic;
+            color: #999;
+            font-size: 18px;
+        }
+        .product-list {
+            margin-bottom: 40px;
+        }
+        .product-list h2 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        .product-list .product-item {
+            display: flex;
+            justify-content: space-between;
+            background: #ecf0f1;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+        .product-list button {
+            background-color: #27ae60;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .product-list button:hover {
+            background-color: #1e8449;
+        }

@@ -1,0 +1,269 @@
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    text-align: center;
+    font-family: arial;
+    margin-left: 500px;
+    margin-right: 100px ;
+    position: relative;
+  
+  }
+  
+  .price {
+    color: grey;
+    font-size: 22px;
+  }
+  
+  .card button {
+    
+    border: none;
+    outline: 0;
+    padding: 12px;
+    color: white;
+    background-color: orangered;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+    
+  }
+  
+  .card button:hover {
+    opacity: 0.7;
+  }
+
+
+
+  .cartaaa {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    text-align: center;
+    font-family: arial;
+   margin-bottom: 600px;
+   margin-top: 400px;
+   position: relative;
+  top: -300px;
+  }
+  
+  .price {
+    color: grey;
+    font-size: 22px;
+  }
+  
+  .cartaaa button {
+    border: none;
+    outline: 0;
+    padding: 12px;
+    color: white;
+    background-color: orangered;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+  }
+  
+  .card button:hover {
+    opacity: 0.7;
+  }
+
+
+
+
+
+
+  .carting {
+    margin-left: 500px;
+    position:absolute;
+    width: 300px;
+    height: 100px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    text-align: center;
+    font-family: arial;
+   margin-bottom: 500px;
+margin-top: -2000px;
+position: relative;
+  top: 1050px;
+  float: left;
+    margin-left: 100px;
+
+    position: relative;
+  top: 550px;
+
+  }
+  
+  .price {
+    color: grey;
+    font-size: 22px;
+  }
+  
+  .carting button {
+    border: none;
+    outline: 0;
+    padding: 12px;
+    color: white;
+    background-color: orangered;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+  }
+  
+  .card button:hover {
+    margin-left: 400p;
+    opacity: 0.7;
+  }
+
+
+
+
+
+
+
+  .cartseff {
+    width: 300px;
+    height: 100px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    text-align: center;
+    font-family: arial;
+   margin-bottom: 500px;
+margin-top: -2000px;
+
+  }
+  
+  .price {
+    color: grey;
+    font-size: 22px;
+  }
+  
+  .cartseff button {
+    margin-top: -200px;
+    border: none;
+    outline: 0;
+    padding: 12px;
+    color: white;
+    background-color: orangered;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+  }
+  
+  .card button:hover {
+    opacity: 0.7;
+  }
+
+
+
+  {
+    box-sizing: border-box;
+  }
+  
+  /* Стиль поля поиска */
+  form.example input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+  }
+  
+  /* Стиль кнопки "Отправить" */
+  form.example button {
+    margin-left: 950px;
+    top: 100px;
+    float: left;
+    width: 20%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none; /* Предотвращение двойных границ */
+    cursor: pointer;
+  }
+  
+  form.example button:hover {
+    background: #0b7dda;
+    margin-top: 100px;
+  }
+  
+  /* Снимите поплавки */
+  form.example::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+
+
+  .pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+  }
+  
+  /* Стиль активной/текущей ссылки */
+  .pagination a.active {
+    background-color: dodgerblue;
+    color: white;
+  }
+  
+  /* Добавить серый цвет фона при наведении курсора мыши */
+  .pagination a:hover:not(.active) {background-color: #ddd;}
+
+
+
+
+
+  {
+    box-sizing: border-box;
+  }
+  
+  /* Стиль поля поиска */
+  form.example input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+  }
+  
+  /* Стиль кнопки "Отправить" */
+  form.example button {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 0%;
+    border: 1px solid grey;
+    border-left: none; /* Предотвращение двойных границ */
+    cursor: pointer;
+    position: relative;
+    top: -40px;
+    float: left;
+    margin-left: 180px;
+  }
+  
+  form.example button:hover {
+    background: #0b7dda;
+    position: relative
+    top: 20pxpx;
+  }
+  
+  /* Снимите поплавки */
+  form.example::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+
+
+  

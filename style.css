@@ -1,0 +1,852 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: ;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: whitesmoke;
+    color: red;
+    padding: 20px;
+}
+
+p {
+    color: black;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #ff6347;
+    /* Цвет при наведении */
+}
+
+.project-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.project {
+    position: relative;
+    width: 300px;
+}
+
+.project img {
+    width: 100%;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.project:hover .overlay {
+    opacity: 1;
+    /* Прозрачность при наведении */
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    position: relative; top: 300px
+}
+
+footer h2 {
+    margin: 0;
+    color: #ff6347;
+    /* Цвет заголовка */
+    
+}
+
+* {
+    box-sizing: border-box
+}
+
+
+/* Добавить отступы для контейнеров */
+
+.container {
+    padding: 16px;
+}
+
+
+/* Поля ввода полной ширины */
+
+input[type=text],
+input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+
+input[type=text]:focus,
+input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+
+/* Изменять стили по умолчанию кадровой */
+
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+}
+
+
+/* Установите стиль для кнопки Отправить/зарегистрировать */
+
+.registerbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+.registerbtn:hover {
+    opacity: 1;
+}
+
+
+/* Добавить синий цвет текста для ссылок */
+
+a {
+    color: dodgerblue;
+}
+
+
+/* Установите серый цвет фона и центрируйте текст раздела "вход" в систему */
+
+.signin {
+    background-color: #f1f1f1;
+    text-align: center;
+}
+
+.row {
+    display: -ms-flexbox;
+    /* IE10 */
+    display: flex;
+    -ms-flex-wrap: wrap;
+    /* IE10 */
+    flex-wrap: wrap;
+    margin: 0 -16px;
+}
+
+.col-25 {
+    -ms-flex: 25%;
+    /* IE10 */
+    flex: 25%;
+}
+
+.col-50 {
+    -ms-flex: 50%;
+    /* IE10 */
+    flex: 50%;
+}
+
+.col-75 {
+    -ms-flex: 75%;
+    /* IE10 */
+    flex: 75%;
+}
+
+.col-25,
+.col-50,
+.col-75 {
+    padding: 0 16px;
+}
+
+.container {
+    background-color: #f2f2f2;
+    padding: 5px 20px 15px 20px;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+}
+
+input[type=text] {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+label {
+    margin-bottom: 10px;
+    display: block;
+}
+
+.icon-container {
+    margin-bottom: 20px;
+    padding: 7px 0;
+    font-size: 24px;
+}
+
+.btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    width: 100%;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 17px;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+span.price {
+    float: right;
+    color: grey;
+}
+
+
+/* Адаптивный макет - когда экран меньше 800 пикселей в ширину, сделайте два столбца стеком друг на друга, а не рядом друг с другом (и измените направление-сделайте столбец "корзина" сверху) */
+
+@media (max-width: 800px) {
+    .row {
+        flex-direction: column-reverse;
+    }
+    .col-25 {
+        margin-bottom: 20px;
+    }
+}
+
+* {
+    box-sizing: border-box
+}
+
+
+/* стиль контейнера */
+
+.container {
+    position: relative;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px 0 30px 0;
+}
+
+
+/* стиль входные сигналы и кнопки связи */
+
+input,
+.btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    margin: 5px 0;
+    opacity: 0.85;
+    display: inline-block;
+    font-size: 17px;
+    line-height: 20px;
+    text-decoration: none;
+    /* снять подчеркивание с якорей */
+}
+
+input:hover,
+.btn:hover {
+    opacity: 1;
+}
+
+
+/* добавьте соответствующие цвета к кнопкам fb, twitter и google */
+
+.fb {
+    background-color: #3B5998;
+    color: white;
+}
+
+.twitter {
+    background-color: #55ACEE;
+    color: white;
+}
+
+.google {
+    background-color: #dd4b39;
+    color: white;
+}
+
+
+/* стиль кнопки "Отправить" */
+
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+
+/* Макет двух столбцов */
+
+.col {
+    float: left;
+    width: 50%;
+    margin: auto;
+    padding: 0 50px;
+    margin-top: 6px;
+}
+
+
+/* Очистить поплавки после столбцов */
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+/* вертикальная линия */
+
+.vl {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    border: 2px solid #ddd;
+    height: 175px;
+}
+
+
+/* текст внутри вертикальной линии */
+
+.inner {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    padding: 8px 10px;
+}
+
+
+/* Скрыть текст на средних и больших экранах */
+
+.hide-md-lg {
+    display: none;
+}
+
+
+/* нижний контейнер */
+
+.bottom-container {
+    text-align: center;
+    background-color:  whitesmoke;
+    border-radius: 0px 0px 4px 4px;
+}
+
+
+/* Адаптивный макет - когда экран меньше, чем 650px широкий, сделать два столбца укладываются друг на друга, а не рядом друг с другом */
+
+@media screen and (max-width: 650px) {
+    .col {
+        width: 100%;
+        margin-top: 0;
+    }
+    /* скрыть вертикальную линию */
+    .vl {
+        display: none;
+    }
+    /* показать скрытый текст на маленьких экранах */
+    .hide-md-lg {
+        display: block;
+        text-align: center;
+    }
+}
+
+input[type=text] {
+    width: 130px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+
+/* Когда поле ввода получает фокус, измените его ширину на 100% */
+
+input[type=text]:focus {
+    width: 100%;
+}
+
+* {
+    box-sizing: border-box
+}
+
+
+/* Контейнер слайд-шоу */
+
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+}
+
+
+/* Скрыть изображения по умолчанию */
+
+.mySlides {
+    display: none;
+}
+
+
+/* Вперед иназад кнопки */
+
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+
+/* Положение "next кнопки" справа */
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+
+/* При наведении курсора добавьте черный цвет фона с немного прозрачным */
+
+.prev:hover,
+.next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+
+/* Подпись текст */
+
+.text {
+    color: #f2f2f2;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+}
+
+
+/* Номер текста (1/3 и т.д.) */
+
+.numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+
+
+/* Точки/пули/индикаторы */
+
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active,
+.dot:hover {
+    background-color: #717171;
+}
+
+
+/* Исчезающая анимация */
+
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+    from {
+        opacity: .4
+    }
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes fade {
+    from {
+        opacity: .4
+    }
+    to {
+        opacity: 1
+    }
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.close {
+    float: right;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+button.back-btn {
+    margin-top: 20px;
+    padding: 8px 16px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.close {
+    float: right;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+button.back-btn {
+    margin-top: 20px;
+    padding: 8px 16px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.close {
+    float: right;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+button.back-btn {
+    margin-top: 20px;
+    padding: 8px 16px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+button {
+    margin-right: 10px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: black;
+}
+
+button.back-btn {
+    margin-top: 20px;
+    padding: 8px 16px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+button {
+    margin-right: 10px;
+}
+.section-gallery {
+    position: relative; top: 100px
+
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+.container {
+    width: 100%;
+    max-width: 480px; /* Увеличил максимальную ширину */
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.auth-form {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+.auth-form h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #283618; /* Цвет заголовка */
+    font-weight: 600;
+    font-size: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease-in-out;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #588157; /* Цвет при фокусе */
+    box-shadow: 0 0 0 0.2rem rgba(88, 129, 87, 0.25); /* Тень при фокусе */
+}
+
+.error-message {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: none;
+}
+
+.auth-form button[type="submit"],  /* Стилизуем кнопки type=submit */
+.auth-links button {              /* Стилизуем кнопки соцсетей */
+    background-color: #588157;     /* Цвет кнопки */
+    color: white;
+    padding: 0.875rem 1.5rem;      /* Увеличил паддинг */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.125rem;           /* Увеличил размер шрифта */
+    width: 100%;                  /* Занимает всю ширину */
+    transition: background-color 0.3s ease;
+    margin-bottom: 0.75rem;       /* Небольшой отступ снизу */
+    font-weight: 500;               /* Полужирный текст */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);  /* Небольшая тень */
+}
+
+.auth-form button[type="submit"]:hover,
+.auth-links button:hover {
+    background-color: #3d5a38;     /* Цвет при наведении */
+}
+
+.auth-message {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 4px;
+    display: none;
+}
+
+.auth-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.auth-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.auth-links {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.auth-links a {
+    color: #007bff;
+    text-decoration: none;
+    margin: 0 0.75rem;
+    transition: color 0.2s ease-in-out;
+}
+
+.auth-links a:hover {
+    color: #0056b3;
+}
+
+
+/* Адаптивные стили */
+@media (max-width: 576px) {
+    .container {
+        padding: 1rem;  /* Уменьшаем отступы на маленьких экранах */
+    }
+
+    .auth-form {
+        padding: 1.5rem; /* Уменьшаем внутренние отступы */
+    }
+
+    .auth-form h2 {
+        font-size: 1.75rem; /* Уменьшаем размер заголовка */
+    }
+
+    .form-group label {
+        font-size: 0.875rem; /* Уменьшаем размер подписей */
+    }
+
+    .form-group input {
+        font-size: 0.9rem;   /* Уменьшаем размер ввода */
+    }
+
+    .auth-form button[type="submit"],
+    .auth-links button {
+        font-size: 1rem;    /* Уменьшаем размер кнопки */
+        padding: 0.75rem 1.25rem; /* Уменьшаем отступы кнопки */
+    }
+}

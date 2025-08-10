@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Маркетплейс Bloody - О нас </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+        
+        h1 {
+            text-align: center;
+        }
+        
+        .faq-item {
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+            cursor: pointer;
+        }
+        
+        .faq-question {
+            font-weight: bold;
+            position: relative;
+            padding-right: 20px;
+        }
+        
+        .faq-question::after {
+            content: '+';
+            position: absolute;
+            right: 0;
+            font-weight: bold;
+        }
+        
+        .faq-item.active .faq-question::after {
+            content: '-';
+        }
+        
+        .faq-answer {
+            display: none;
+            margin-top: 8px;
+        }
+        
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Маркетплейс Bloody - О нас </h1>
+    <div class="faq-item">
+        <div class="faq-question">Кто мы такие?</div>
+        <div class="faq-answer">
+            Маркетплейс Bloody - это быстрый, удобный маркетплейс которые торгует дороги аксесуарами.
+        </div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question">Когда мы открылись?</div>
+        <div class="faq-answer">
+            Маркетплейс bloody открылся 23.04.2025 c этого дня мы начали активную разработку сайта
+        </div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question">Где мы находимся?</div>
+        <div class="faq-answer">
+            Мы пока что еще не открылись работаем только онлайн
+        </div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question">Контакты</div>
+        <div class="faq-answer">
+            <strong><p> tg; Не распространяется.</p></strong>
+            <strong><p> email; homyak111234@gmail.com</p></strong>
+            <strong><p> Горячая линия; +7 999 469 97-25</p></strong>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">Наши будущие интерьеры</div>
+        <div class="faq-answer">
+            <h1>Они будут выглядить примерно так:</h1>
+            <div class="gallery">
+                <img src="hsh.jpg" width="150" height="150" alt="Интерьер 1">
+                <img src="ziz.jpg" width="150" height="150" alt="Интерьер 2">
+                <img src="loll.jpg" width="150" height="150" alt="Интерьер 3">
+                <img src="poip.jpg" width="150" height="150" alt="Интерьер 4">
+            </div>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">Как узнать больше информации о нас?</div>
+        <div class="faq-answer">
+            Перейдите по ссылке снизу
+            <a href="dy.html">тык</a>
+        </div>
+        <script>
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    item.classList.toggle('active');
+                });
+            });
+        </script>
+</body>
+
+</html>

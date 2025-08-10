@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Страница поддержки</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 20px;
+            line-height: 1.5;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            margin-bottom: 30px;
+        }
+        textarea, input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 1em;
+            box-sizing: border-box;
+            margin-top: 5px;
+            resize: vertical;
+        }
+        button {
+            margin-top: 10px;
+            padding: 8px 15px;
+            font-size: 1em;
+            cursor: pointer;
+            background-color: #007BFF;
+            border: none;
+            color: white;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+            margin-top: 5px;
+        }
+        .questions {
+            margin-top: 20px;
+        }
+        .question-item {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            background-color: #fafafa;
+            position: relative;
+        }
+        .question-text {
+            font-weight: bold;
+            margin-bottom: 10px;
+            white-space: pre-wrap;
+        }
+        .answer-list {
+            margin-top: 10px;
+            padding-left: 20px;
+            border-left: 3px solid #007BFF;
+        }
+        .answer-item {
+            margin-bottom: 8px;
+            white-space: pre-wrap;
+            position: relative;
+            padding-right: 60px;
+        }
+        .answer-form {
+            margin-top: 10px;
+        }
+        .answer-input {
+            width: 100%;
+            padding: 8px;
+            font-size: 0.95em;
+            box-sizing: border-box;
+        }
+        .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #dc3545;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            font-size: 0.9em;
+            cursor: pointer;
+            border-radius: 4px;
+                        transition: background-color 0.3s ease;
+        }
+        .delete-btn:hover {
+            background-color: #a71d2a;
+        }
+        .delete-answer-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: #dc3545;
+            border: none;
+            color: white;
+            padding: 2px 6px;
+            font-size: 0.8em;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+            line-height: 1;
+        }
+        .delete-answer-btn:hover {
+            background-color: #a71d2a;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Поддержка</h1>
+
+    <form id="questionForm">
+        <label for="questionText">Задайте ваш вопрос:</label>
+        <textarea id="questionText" rows="3" placeholder="Введите вопрос здесь..."></textarea>
+        <div class="error" id="questionError"></div>
+        <button type="submit">Отправить вопрос</button>
+    </form>
+    <form action="dy.html">
+      <button onclick="click">На главную</button>
+    </form>
+
+    <div class="questions" id="questionsContainer">
+        <!-- Вопросы с ответами будут здесь -->
+    </div>
+
+    <script>
+        const questionForm = document.getElementById('questionForm');
+        const questionText = document.getElementById('questionText');
+        const questionError = document.getElementById('questionError');
+        const questionsContainer = document.getElementById('questionsContainer');
+
+        function loadQuestions() {
+            const questions = JSON.parse(localStorage.getItem('supportQuestions')) || [];
+            renderQuestions(questions);
+        }
+
+        function saveQuestions(questions) {
+            localStorage.setItem('supportQuestions', JSON.stringify(questions));
+        }
+
+        function renderQuestions(questions) {
+            if (questions.length === 0) {
+                questionsContainer.innerHTML = '<p style="text-align:center; color:#777; font-style:italic;">Пока нет вопросов.</p>';
+                return;
+            }
+
+            questionsContainer.innerHTML = questions.map((q, qIndex) => {
+                const answersHTML = (q.answers && q.answers.length > 0)
+                    ? q.answers.map((ans, aIndex) => `
+                        <div class="answer-item" data-qindex="${qIndex}" data-aindex="${aIndex}">
+                            ${escapeHtml(ans)}
+                            <button class="delete-answer-btn" title="Удалить ответ" data-qindex="${qIndex}" data-aindex="${aIndex}">&times;</button>
+                        </div>
+                    `).join('')
+                    : '<em>Ответов пока нет.</em>';
+
+                return `
+                    <div class="question-item" data-index="${qIndex}">
+                        <div class="question-text">${escapeHtml(q.text)}</div>
+                        <button class="delete-btn" title="Удалить вопрос" data-index="${qIndex}">Удалить вопрос</button>
+                        <div class="answer-list">${answersHTML}</div>
+                        <form class="answer-form" data-index="${qIndex}">
+                            <input type="text" class="answer-input" placeholder="Напишите ответ..." />
+                            <button type="submit">Ответить</button>
+                        </form>
+                    </div>
+                `;
+            }).join('');
+
+            // Обработчики удаления вопросов
+            const deleteQuestionButtons = questionsContainer.querySelectorAll('.delete-btn');
+            deleteQuestionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const idx = parseInt(button.getAttribute('data-index'));
+                    deleteQuestion(idx);
+                });
+            });
+
+            // Обработчики удаления ответов
+            const deleteAnswerButtons = questionsContainer.querySelectorAll('.delete-answer-btn');
+            deleteAnswerButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const qIdx = parseInt(button.getAttribute('data-qindex'));
+                    const aIdx = parseInt(button.getAttribute('data-aindex'));
+                    deleteAnswer(qIdx, aIdx);
+                });
+            });
+
+            // Обработчики форм ответов
+            const answerForms = questionsContainer.querySelectorAll('.answer-form');
+            answerForms.forEach(form => {
+                form.addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    const idx = parseInt(form.getAttribute('data-index'));
+                    const input = form.querySelector('.answer-input');
+                    const answerText = input.value.trim();
+                    if (!answerText) {
+                        alert('Пожалуйста, введите текст ответа');
+                        return;
+                    }
+                    addAnswer(idx, answerText);
+                    input.value = '';
+                });
+            });
+        }
+
+        function addAnswer(questionIndex, answerText) {
+            const questions = JSON.parse(localStorage.getItem('supportQuestions')) || [];
+            if (questions[questionIndex]) {
+                if (!Array.isArray(questions[questionIndex].answers)) {
+                    questions[questionIndex].answers = [];
+                }
+                questions[questionIndex].answers.push(answerText);
+                saveQuestions(questions);
+                renderQuestions(questions);
+            }
+        }
+
+        function deleteQuestion(index) {
+            if (!confirm('Вы действительно хотите удалить этот вопрос?')) return;
+            const questions = JSON.parse(localStorage.getItem('supportQuestions')) || [];
+            if (index >= 0 && index < questions.length) {
+                questions.splice(index, 1);
+                saveQuestions(questions);
+                renderQuestions(questions);
+            }
+        }
+
+        function deleteAnswer(questionIndex, answerIndex) {
+            if (!confirm('Вы действительно хотите удалить этот ответ?')) return;
+            const questions = JSON.parse(localStorage.getItem('supportQuestions')) || [];
+            if (questions[questionIndex] && questions[questionIndex].answers && answerIndex >= 0 && answerIndex < questions[questionIndex].answers.length) {
+                questions[questionIndex].answers.splice(answerIndex, 1);
+                saveQuestions(questions);
+                renderQuestions(questions);
+            }
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        questionForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            questionError.textContent = '';
+
+            const text = questionText.value.trim();
+            if (!text) {
+                questionError.textContent = 'Пожалуйста, введите вопрос';
+                return;
+            }
+
+            const questions = JSON.parse(localStorage.getItem('supportQuestions')) || [];
+            questions.unshift({
+                text: text,
+                answers: []
+            });
+
+            saveQuestions(questions);
+            renderQuestions(questions);
+
+            questionText.value = '';
+        });
+
+        loadQuestions();
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ body {
+            font-family: 'Arial', sans-serif; /* Более современный шрифт */
+            color: #444;
+        }
+
+        /* Стили для хедера */
+        header {
+            background-color: #fff; /* Чистый белый фон */
+            padding: 10px 0; /* Меньше вертикального отступа */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08); /* Более мягкая тень */
+        }
+
+        .navbar-brand {
+            font-size: 1.75em; /* Немного меньше размер бренда */
+            font-weight: 600; /* Полужирный шрифт */
+            color: #3498db !important; /* Акцентный синий цвет */
+        }
+
+        .navbar-nav .nav-link {
+            color: #555 !important;
+            font-size: 1em;
+            margin: 0 10px; /* Меньше горизонтального отступа */
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #3498db !important; /* Акцентный синий при наведении */
+        }
+
+        /* Стили для карусели */
+        .carousel-item {
+            height: 500px; /* Высота карусели */
+            position: relative;
+        }
+
+        .carousel-item img {
+            object-fit: cover; /* По-прежнему важно */
+            height: 100%;
+            width: 100%;
+        }
+
+        .carousel-caption {
+            background-color: rgba(52, 152, 219, 0.7); /* Полупрозрачный синий фон */
+            padding: 30px; /* Больше отступов */
+            border-radius: 15px; /* Более закругленные углы */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 70%; /* Уже, чтобы текст не занимал всю ширину */
+        }
+        .carousel-caption h5 {
+            font-size: 2.2em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #fff; /* Белый текст */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Тень для лучшей читаемости */
+        }
+
+        .carousel-caption p {
+            font-size: 1.1em;
+            color: #ecf0f1; /* Светло-серый текст */
+        }
+
+        /* Стрелки карусели */
+        .carousel-control-prev,
+        .carousel-control-next {
+            opacity: 0.8; /* Сделаем стрелки менее навязчивыми */
+            width: 6%; /* Увеличим область нажатия */
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: rgba(0, 0, 0, 0.3); /* Темный фон для иконок */
+            border-radius: 50%; /* Круглые иконки */
+            padding: 12px; /* Размер иконок */
+        }
+
+        .carousel-control-prev:hover,
+        .carousel-control-next:hover {
+            opacity: 1; /* Делаем стрелки более видимыми при наведении */
+        }
+
+        /* Стили для контента */
+        main {
+            padding: 30px;
+        }

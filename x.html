@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>Cотрудничество</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 400px;
+            margin: auto;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 3px;
+        }
+        .success-message {
+            color: green;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        button {
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            background-color: #007BFF;
+            border: none;
+            color: white;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+       body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        font-family: Arial, sans-serif;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
+       
+        background-image:
+            
+            url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmZL7-H4SQp20bHerCoKZ63lf6EcQhqVo4Wg&s');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+
+        
+        filter: contrast(1.2) saturate(1.1);
+        
+    }
+
+    @media (max-width: 768px) {
+        body {
+            background-image:
+               
+                url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmZL7-H4SQp20bHerCoKZ63lf6EcQhqVo4Wg&s');
+        }
+    }
+
+    .content {
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 20px 40px;
+        border-radius: 10px;
+        max-width: 600px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.7);
+    }
+        
+    </style>
+</head>
+<body>
+
+    <h2>Форма авторизации</h2>
+
+    <form id="authForm" novalidate>
+        <div>
+            <label for="email">Gmail:</label>
+            <input type="email" id="email" name="email" placeholder="example@gmail.com" />
+            <div class="error" id="emailError"></div>
+        </div>
+
+        <div>
+            <label for="password">Пароль:</label>
+            <input type="password" id="password" name="password" />
+            <div class="error" id="passwordError"></div>
+        </div>
+
+        <div>
+            <label for="confirmPassword">Повторите пароль:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" />
+            <div class="error" id="confirmPasswordError"></div>
+        </div>
+
+        <div>
+            <label for="birthDate">Дата рождения:</label>
+            <input type="date" id="birthDate" name="birthDate" max="" />
+            <div class="error" id="birthDateError"></div>
+        </div>
+<p> Начиная сотрудничество с нами , вы соглашаетесь с нашим <a href="delet.html">Условиями и конфиденциальностью</a>.</p>
+        <button type="submit" class="registerbtn">Продолжить</button>
+    </form>
+
+    <script>
+        // Установка максимальной даты для input date (сегодня)
+        const birthDateInput = document.getElementById('birthDate');
+        const today = new Date().toISOString().split('T')[0];
+        birthDateInput.setAttribute('max', today);
+
+        document.getElementById('authForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Очистка ошибок
+            document.getElementById('emailError').textContent = '';
+            document.getElementById('passwordError').textContent = '';
+            document.getElementById('confirmPasswordError').textContent = '';
+            document.getElementById('birthDateError').textContent = '';
+
+            // Получение значений
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const birthDate = document.getElementById('birthDate').value;
+
+            let valid = true;
+
+            // Проверка email
+            if (!email) {
+                document.getElementById('emailError').textContent = 'Заполните это поле';
+                valid = false;
+            } else if (!email.endsWith('@gmail.com')) {
+                document.getElementById('emailError').textContent = 'Введите корректный Gmail';
+                valid = false;
+            }
+
+            // Проверка пароля
+            if (!password) {
+                document.getElementById('passwordError').textContent = 'Заполните это поле';
+                valid = false;
+            } else if (password.length < 8) {
+                document.getElementById('passwordError').textContent = 'Пароль должен содержать минимум 8 символов';
+                valid = false;
+            }
+
+            // Проверка повторного пароля
+            if (!confirmPassword) {
+                document.getElementById('confirmPasswordError').textContent = 'Заполните это поле';
+                valid = false;
+            } else if (password && confirmPassword !== password) {
+                document.getElementById('confirmPasswordError').textContent = 'Пароли не совпадают';
+                valid = false;
+            }
+
+            // Проверка даты рождения
+            if (!birthDate) {
+                document.getElementById('birthDateError').textContent = 'Заполните это поле';
+                valid = false;
+            }
+
+            if (!valid) {
+                return; // Если есть ошибки, остановить отправку
+            }
+
+            // Проверка возраста
+            const birth = new Date(birthDate);
+            const now = new Date();
+            let age = now.getFullYear() - birth.getFullYear();
+            const monthDiff = now.getMonth() - birth.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && now.getDate() < birth.getDate())) {
+                age--;
+            }
+
+            if (age < 18) {
+                alert('Вам меньше 18 лет');
+                return;
+            }
+
+            // Если все успешно
+            alert('Поздравляем,вы теперь сотрудничаете с нашим сервисом!!');
+
+            // Перенаправление на главную страницу (пример "/")
+            window.location.href = 'dy.html';
+        });
+    </script>
+
+</body>
+</html>

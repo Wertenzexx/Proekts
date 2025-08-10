@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Отзывы</title>
+    <link rel="stylesheet" href="sv.css">
+
+</head>
+<body>
+
+    <h1>Отзывы</h1>
+
+    <form id="reviewForm">
+        <label for="productName">О каком товаре отзыв:</label>
+        <input type="text" id="productName" placeholder="Название товара" required>
+
+        <label for="reviewText">Ваш отзыв:</label>
+        <textarea id="reviewText" placeholder="Напишите ваш отзыв здесь..."></textarea>
+
+        <label for="starRating" style="color: black;">Оценка (звёзды):</label>
+        <select id="starRating" style="color: black;" name="starRating" required>
+            <option value="">Выберите количество звёзд</option>
+            <option value="1"> ⭐</option>
+            <option value="2"> ⭐⭐</option>
+            <option value="3"> ⭐⭐⭐</option>
+            <option value="4"> ⭐⭐⭐⭐</option>
+            <option value="5"> ⭐⭐⭐⭐⭐</option>
+        </select>
+
+        <div class="error" id="errorMsg"></div>
+        <button type="submit">Опубликовать</button>
+    </form>
+    <form action="index.html">
+        <button onclick="click">На главную</button>
+    </form>
+
+    <div class="reviews" id="reviewsContainer">
+        <!-- Отзывы будут здесь -->
+    </div>
+
+    <script src="script111.js"></script>
+</body>
+</html>

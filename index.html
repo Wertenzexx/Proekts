@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Маркетплейс</title>
+    <link rel="stylesheet" href="cart.css">
+    <link rel="stylesheet" href="style8.css">
+    <style>
+        body {
+            background-image: url("");
+        }
+
+        /* Добавим стили для кнопок, чтобы они не были в разнобой */
+        .product-actions button {
+            margin: 5px;
+            /* Добавим небольшой отступ между кнопками */
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+            <div class="container-fluid">
+                <img src="logo.png" style="height: 100px; margin-left: 10px; margin-right: 20px;" alt="Logo">
+                <a class="navbar-brand" href="dy.html">Bloody</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Переключатель навигации">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="ik.html">Регистрация/Вход</a></li>
+                        <li class="nav-item"><a class="nav-link" href="uu.html">Отзывы</a></li>
+                        <li class="nav-item"><a class="nav-link" href="x.html">Сотрудничество с нами</a></li>
+                        <li class="nav-item"><a class="nav-link" href="p.html">Правила пользования</a></li>
+                        <li class="nav-item"><a class="nav-link" href="delet.html">Условия конфиденциальности</a></li>
+                        <li class="nav-item"><a class="nav-link" href="xxxx.html">Тех Поддержка</a></li>
+                        <li class="nav-item"><a class="nav-link" href="af.html">Избранное</a></li>
+                        <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li>
+                                                <li class="nav-item"><a class="nav-link" href="ur.html">О нас</a></li>
+                    </ul>
+                    <div id="balance" style="position: absolute; top: 10px; right: 150px; font-size: 1.5em; color:white">Баланс:
+                        <span id="balanceValue" data-initial-balance="5000000">5000000</span>₽
+                        <!-- Здесь можно менять начальный баланс -->
+                    </div>
+                    <button onclick="openPaymentModal()" id="add-funds-btn" style="position: absolute; top: 10px; right: 10px; font-size: 20px;
+                        margin-bottom: 20px;
+                        text-align: center;
+                        padding: 10px;
+                        background: green;
+                        color: white;
+                        border-radius: 8px;
+                        user-select: none;
+                        width: 110px;
+                        height: 70px;
+                        left: 1530px;
+                        top: 20px;
+                        margin-top: 0px;">Пополнить баланс</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Список товаров</h1>
+        <div class="container">
+            <div class="product">
+                <div class="product-image-container">
+                    <img src="bape.jpg" alt="Сумка Bape" class="product-image">
+                    <span class="discount-badge">-25%</span>
+                    <span class="like-button"
+                        onclick="addToFavorites({ id: 'product1', name: 'Сумка Bape', description: ' Вместительная,брендовая сумка от фирмы Bape.Вместительность до 50kg.', imageUrl: 'bape.jpg' })">❤️</span>
+                </div>
+                <h3 class="product-title" style="color: black;">Сумка Bape</h3>
+                <p class="product-description">Сумка Bape – Вместительная,брендовая сумка от фирмы Bape.Вместительность до 50kg.</p>
+                <p class="product-price">
+                    Цена:
+                    <span class="original-price">250000</span>₽
+                    <span class="discounted-price">187500</span>₽
+                </p>
+                <div class="product-actions">
+                    <button class="add-to-cart-btn" data-product-name="Сумка Bape" data-product-price="187500">Купить со скидкой
+                        -25%</button>
+                    <button class="add-to-cart-btn" data-product-name="Сумка Bape" data-product-price="187500">Добавить в
+                        корзину</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <div class="product-image-container">
+                    <img src="okal.webp" alt="Толстовка Bape" class="product-image">
+                    <span class="discount-badge">-30%</span>
+                    <span class="like-button"
+                        onclick="addToFavorites({ id: 'product2', name: 'Толстовка Bape', description: ' это теплая, красивая толстовка от фирмы Bape отлично сочитается с любым рюкзаком.', imageUrl: 'okal.webp' })">❤️</span>
+                </div>
+                <h3 class="product-title" style="color: black;">Толстовка Bape</h3>
+                <p class="product-description">Толстовка Bape - это теплая, красивая толстовка от фирмы Bape отлично сочитается с любым рюкзаком.</p>
+                <p class="product-price">
+                    Цена:
+                    <span class="original-price">30000</span>₽
+                    <span class="discounted-price">21000</span>₽
+                </p>
+                <div class="product-actions">
+                    <button class="add-to-cart-btn" data-product-name="Толстовка Bape" data-product-price="21000">Купить со скидкой-30%</button>
+                    <button class="add-to-cart-btn" data-product-name="Толстовка Bape" data-product-price="21000">Добавить в
+                        корзину</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <div class="product-image-container">
+                    <img src="jjoooooj.jpg" alt="Кошелек Gucci" class="product-image">
+                    <span class="discount-badge">-20%</span>
+                    <span class="like-button"
+                        onclick="addToFavorites({ id: 'product3', name: 'Кошелек Gucci', description: ' Богатый, красивый кошелек сделанный из крокодиловой кожи. Очень впишется к вашей сумке.', imageUrl: 'jjoooooj.jpg' })">❤️</span>
+                </div>
+                <h3 class="product-title" style="color: black;">Кошелек Gucci</h3>
+                <p class="product-description">Кошелек Gucci - Богатый, красивый кошелек сделанный из крокодиловой кожи. Очень впишется к вашей сумке.</p>
+                <p class="product-price">
+                    Цена:
+                    <span class="original-price">225000</span>₽
+                    <span class="discounted-price">180000</span>₽
+                </p>
+                <div class="product-actions">
+                    <button class="add-to-cart-btn" data-product-name="Кошелек Gucci" data-product-price="180000">Купить со скидкой
+                        -20%</button>
+                    <button class="add-to-cart-btn" data-product-name="Кошелек Gucci" data-product-price="180000">Добавить в
+                        корзину</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <div class="product-image-container">
+                    <img src="tyk.jpg" alt="Кроссовки LV" class="product-image" style="height: 370px;">
+                    <span class="discount-badge">-15%</span>
+                    <span class="like-button"
+                        onclick="addToFavorites({ id: 'product4', name: 'Кроссовки LV', description: 'богатое решение для покупки.Кроссовки сделаны из настоящей кожи,очень удобны для ходьбы и беги, и просто очень богатые стильные.', imageUrl: 'tyk.jpg' })">❤️</span>
+                </div>
+                <h3 class="product-title" style="color: black;">Кроссовки LV</h3>
+                <p class="product-description">Кроссовки LV - богатое решение для покупки.Кроссовки сделаны из настоящей кожи,очень удобны для ходьбы и беги, и просто очень богатые стильные.</p>
+                <p class="product-price">
+                    Цена:
+                    <span class="original-price">3000000</span>₽
+                    <span class="discounted-price">2550000</span>₽
+                </p>
+                <div class="product-actions">
+                    <button class="add-to-cart-btn" data-product-name="Кроссовки LV" data-product-price="2550000">Купить со скидкой
+                        -15%</button>
+                    <button class="add-to-cart-btn" data-product-name="Кроссовки LV" data-product-price="2550000">Добавить в
+                        корзину</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <div class="product-image-container">
+                    <img src="sra.jpg" alt="Часы Rolex" class="product-image" style="height: 420px;">
+                    <span class="discount-badge">-10%</span>
+                    <span class="like-button"
+                        onclick="addToFavorites({ id: 'product5', name: 'Часы Rolex', description: ' Богатые, дорогие часы, настоящий знак роскоши! Также эти часы покрыты голубыми бриллиантами.', imageUrl: 's1.jpg' })">❤️</span>
+                </div>
+                <h3 class="product-title" style="color: black;">Часы Rolex</h3>
+                <p class="product-description">Часы Rolex – Богатые, дорогие часы, настоящий знак роскоши! Также эти часы покрыты голубыми бриллиантами.</p>
+                <p class="product-price" style="margin-top: -100px;">
+                    Цена:
+                    <span class="original-price">5000000</span>₽
+                    <span class="discounted-price">4500000</span>₽
+                </p>
+                <div class="product-actions" style="margin-top: -100px;">
+                    <button class="add-to-cart-btn" data-product-name="Часы Rolex" data-product-price="4500000">Купить со скидкой
+                        -10%</button>
+                    <button class="add-to-cart-btn" data-product-name="Часы Rolex" data-product-price="4500000">Добавить в
+                        корзину</button>
+                </div>
+            </div>
+            <div class="product">
+                <div class="product-image-container">
+                    <img src="sima.webp" alt="Рюкзак Gucci(Женский)" class="product-image">
+                    <span class="discount-badge">-20%</span>
+                    <span class="like-button"
+                        onclick="addToFavorites({ id: 'product6', name: 'Рюкзак Gucci(Женский)', description: 'рюкзак женский городской гучи gucci среднего размера имеет одно отделение на молнии, один внутренний карман на молнии, один внешний карман на молнии. ...', imageUrl: 'sima.webp' })">❤️</span>
+                </div>
+                <h3 class="product-title" style="color: black;">Рюкзак Gucci(Женский)</h3>
+                <p class="product-description">Рюкзак Gucci(Женский) - рюкзак женский городской гучи gucci среднего размера имеет одно отделение на молнии, один внутренний карман на молнии, один внешний карман на молнии. </p>
+                <p class="product-price">
+                    Цена:
+                    <span class="original-price">144000</span>₽
+                    <span class="discounted-price">116000</span>₽
+                </p>
+                <div class="product-actions">
+                    <button class="add-to-cart-btn" data-product-name="Рюкзак Gucci(Женский)"
+                        data-product-price="116000">Купить со скидкой -20%</button>
+                    <button class="add-to-cart-btn" data-product-name="Рюкзак Gucci(Женский)"
+                        data-product-price="116000">Добавить в корзину</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section id="cart-section">
+        <h2>Корзина 🛒 :</h2>
+        <ul id="cart-items">
+            <!-- Здесь будут отображаться товары в корзине -->
+        </ul>
+        <p>Итого: <span id="cart-total">0</span></p>
+        <button id="checkout-btn">Оформить заказ</button>
+        <form action="af.html"></form>
+    </section>
+
+    <main>
+        <h1>Выставленные товары</h1>
+
+        <div class="product-container" id="productContainer">
+            <!-- Сюда будут добавляться карточки товаров -->
+        </div>
+    </main>
+
+    <section id="gallery" style="width: 1130px;">
+        <h2>Наши будущии пункты выдачи заказов</h2>
+        <div class="gallery">
+            <img src="hsh.jpg" width="150" height="150" alt="Интерьер 1">
+            <img src="ziz.jpg" width="150" height="150" alt="Интерьер 2">
+            <img src="loll.jpg" width="150" height="150" alt="Интерьер 3">
+            <img src="poip.jpg" width="150" height="150" alt="Интерьер 4">
+        </div>
+    </section>
+
+    <footer id="contact">
+        <h2>О нас</h2>
+        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#longContentModal">
+            Контакты
+        </button>
+        <div class="modal fade" id="longContentModal" tabindex="1" aria-labelledby="longContentModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="longContentModalLabel"></h5>
+                        <div>
+                            <p><strong>tg; Не распространяется.</strong></p>
+                            <p>email; homyak111234@gmail.com</p>
+                            <p>Горячая линия; +7 999 469 97-25</p>
+                            <p>Ссылка на чат с нами<a href="https://vk.com/homyachok_dm" id="vkLoginLink"
+                                    class="vk btn">Ссылка на чат с нами</a></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+    <script>
+
+        function addToFavorites(product) {
+            let favorites = localStorage.getItem('favorites');
+            favorites = favorites ? JSON.parse(favorites) : [];
+
+            const alreadyInFavorites = favorites.some(fav => fav.id === product.id);
+
+            if (!alreadyInFavorites) {
+                favorites.push(product);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                alert(product.name + ' добавлен в избранное!');
+            } else {
+                alert(product.name + ' уже в избранном!');
+            }
+        }
+
+        function plat() {
+            window.location.href = "platezh.html";
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            let balance = localStorage.getItem('balance');
+
+            // Получаем элемент, содержащий начальный баланс
+            const balanceElement = document.getElementById('balanceValue');
+            const initialBalance = parseInt(balanceElement.dataset.initialBalance); // Считываем из data-атрибута
+
+            // Проверка, что значение спана является числом
+            if (isNaN(initialBalance)) {
+                console.error('Некорректное значение начального баланса в HTML.');
+                initialBalance = 1000000; // Значение по умолчанию
+            }
+
+            if (balance === null || isNaN(parseInt(balance))) {
+                // Если баланса нет в localStorage или он не является числом, устанавливаем его
+                localStorage.setItem('balance', initialBalance);
+                balance = initialBalance;
+            } else {
+                // Если баланс есть, берем его из localStorage
+                balance = parseInt(balance);
+            }
+
+            // Обновляем отображение баланса в HTML
+            balanceElement.textContent = balance.toLocaleString('ru-RU');
+
+            const addFundsBtn = document.getElementById('add-funds-btn');
+            const cartItemsElement = document.getElementById('cart-items');
+            const cartTotalElement = document.getElementById('cart-total');
+            const checkoutBtn = document.getElementById('checkout-btn');
+
+            let cart = []; // Initialize the cart array here
+
+            function updateBalance() {
+                balanceElement.textContent = balance.toLocaleString('ru-RU');
+                localStorage.setItem('balance', balance);
+            }
+            function addToCart(productName, productPrice) {
+                cart.push({
+                    name: productName,
+                    price: parseFloat(productPrice)
+                });
+                updateCart();
+            }
+
+            function removeFromCart(index) {
+                cart.splice(index, 1);
+                updateCart();
+            }
+
+            function updateCart() {
+                cartItemsElement.innerHTML = '';
+                let total = 0;
+                cart.forEach((item, index) => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${item.name} - ${item.price.toLocaleString('ru-RU')} ₽`;
+
+                    const removeButton = document.createElement('button');
+                    removeButton.textContent = 'Удалить';
+                    removeButton.addEventListener('click', function () {
+                        removeFromCart(index);
+                    });
+
+                    listItem.appendChild(removeButton);
+                    cartItemsElement.appendChild(listItem);
+                    total += item.price;
+                });
+                cartTotalElement.textContent = total.toLocaleString('ru-RU') + ' ₽';
+            }
+
+            addFundsBtn.addEventListener('click', function () {
+                let amount = prompt("Введите сумму пополнения");
+                if (amount !== null && !isNaN(parseInt(amount))) {
+                    balance += parseInt(amount);
+                    localStorage.setItem('balance', balance);
+                    updateBalance();
+                    alert('Баланс успешно пополнен на ' + balance.toLocaleString('ru-RU') + ' ₽. Текущий баланс: ' + balance.toLocaleString('ru-RU') + ' ₽');
+                } else {
+                    alert('Пополнение отменено или введена некорректная сумма.');
+                }
+            });
+
+            const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const productName = button.dataset.productName;
+                    const productPrice = button.dataset.productPrice;
+                    addToCart(productName, productPrice);
+                });
+            });
+
+            checkoutBtn.addEventListener('click', function () {
+                let cartTotal = 0;
+
+                //Правильно считаем сумму заказа
+                cart.forEach(item => {
+                    cartTotal += item.price;
+                });
+
+                if (balance >= cartTotal) {
+                    balance -= cartTotal;
+                    updateBalance();
+                    alert('Заказ оформлен! Спасибо за покупку.');
+                    cart = []; // Очищаем корзину
+                    updateCart();
+                } else {
+                    alert('Недостаточно средств на балансе.');
+                }
+            });
+
+            updateBalance();
+            updateCart();
+        });
+
+        function likeProduct(productId, button) {
+            if (localStorage.getItem('liked_' + productId)) {
+                alert('Вы уже поставили лайк этому товару!');
+                return;
+            }
+
+            let likeCountElement = document.getElementById('like-count-' + productId);
+            let currentCount = parseInt(likeCountElement.textContent) || 0;
+            let newCount = currentCount + 1;
+            likeCountElement.textContent = newCount;
+
+            // Store the like count in localStorage
+            localStorage.setItem('likeCount_' + productId, newCount);
+
+            localStorage.setItem('liked_' + productId, 'true'); // Store that the user liked it
+
+            button.classList.add('liked');
+            button.disabled = true;
+        }
+        function loadLikes() {
+            const likeButtons = document.querySelectorAll('.like-button');
+            likeButtons.forEach(button => {
+                const productId = button.dataset.productId;
+                const likeCountElement = document.getElementById('like-count-' + productId);
+
+                // Load the like count from localStorage
+                let storedLikeCount = localStorage.getItem('likeCount_' + productId);
+                if (storedLikeCount) {
+                    likeCountElement.textContent = storedLikeCount;
+                }
+
+                if (localStorage.getItem('liked_' + productId)) {
+                    button.classList.add('liked');
+                    button.disabled = true;
+                }
+            });
+        }
+
+        window.addEventListener('load', loadLikes);
+    </script>
+</body>
+
+</html>

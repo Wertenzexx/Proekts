@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Интернет-магазин</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Наш магазин</h1>
+    </header>
+
+    <main>
+        <section class="products">
+            <h2>Товары</h2>
+            </section>
+
+        <section class="balance">
+            <h2>Ваш баланс: <span id="balance">0</span> руб.</h2>
+            <button onclick="checkout()">Оплатить корзину</button>
+            <button onclick="openPaymentModal()">Пополнить баланс</button>
+            <button onclick="updateBalanceDisplay()">Обновить баланс</button> <!-- Кнопка для ручного обновления -->
+        </section>
+
+        <!-- Модальное окно для пополнения баланса -->
+        <div id="paymentModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closePaymentModal()">&times;</span>
+                <h2>Пополнение баланса</h2>
+                <label for="cardNumber">Номер карты:</label>
+                <input type="text" id="cardNumber" placeholder="XXXX-XXXX-XXXX-XXXX">
+                <label for="expiryDate">Срок действия:</label>
+                <input type="text" id="expiryDate" placeholder="MM/ГГ">
+                <label for="cvv">CVV:</label>
+                <input type="text" id="cvv" placeholder="123">
+                <label for="amount">Сумма пополнения:</label>
+                <input type="number" id="amount" placeholder="Введите сумму">
+                <button onclick="addBalance()">Пополнить</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Интернет-магазин</p>
+    </footer>
+
+    <script>
+        function addToCart(name, price, image) {
+            let cart = localStorage.getItem('cart');
+            cart = cart ? JSON.parse(cart) : [];
+            cart.push({ name: name, price: price, image: image });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert('Товар "' + name + '" добавлен в корзину!');
+        }
+
+        function updateBalanceDisplay() {
+            let balance = localStorage.getItem('balance') || 0;
+            document.getElementById('balance').textContent = balance;
+        }
+
+        function checkout() {
+            let cart = localStorage.getItem('cart');
+            cart = cart ? JSON.parse(cart) : [];
+            let totalPrice = 0;
+
+            cart.forEach(item => {
+                totalPrice += item.price;
+            });
+                        let balance = parseFloat(localStorage.getItem('balance') || 0);
+
+            if (totalPrice > balance) {
+                alert('Недостаточно средств на балансе!');
+                return;
+            }
+
+            balance -= totalPrice;
+            localStorage.setItem('balance', balance);
+            localStorage.setItem('cart', JSON.stringify([])); // Очищаем корзину
+            alert('Оплата прошла успешно! Остаток на балансе: ' + balance + ' руб.');
+            updateBalanceDisplay();
+        }
+
+        function openPaymentModal() {
+            document.getElementById('paymentModal').style.display = 'block';
+        }
+
+        function closePaymentModal() {
+            document.getElementById('paymentModal').style.display = 'none';
+        }
+
+        function addBalance() {
+            let amount = parseFloat(document.getElementById('amount').value);
+            if (isNaN(amount) || amount <= 0) {
+                alert('Введите корректную сумму для пополнения.');
+                return;
+            }
+            let balance = parseFloat(localStorage.getItem('balance') || 0);
+            balance += amount;
+            localStorage.setItem('balance', balance);
+            //updateBalanceDisplay(); // Убираем немедленное обновление баланса
+            closePaymentModal();
+            alert('Баланс успешно пополнен. Обновите страницу, чтобы увидеть изменения.'); // Изменяем сообщение
+        }
+
+        window.onload = function() {
+            if (!localStorage.getItem('balance')) {
+                localStorage.setItem('balance', 1000); // Начальный баланс
+            }
+            updateBalanceDisplay();
+        };
+    </script>
+
+</body>
+</html>
