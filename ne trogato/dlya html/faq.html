@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>FAQ — Часто задаваемые вопросы</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .faq-item {
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+            cursor: pointer;
+        }
+        .faq-question {
+            font-weight: bold;
+            position: relative;
+            padding-right: 20px;
+        }
+        .faq-question::after {
+            content: '+';
+            position: absolute;
+            right: 0;
+            font-weight: bold;
+        }
+        .faq-item.active .faq-question::after {
+            content: '-';
+        }
+        .faq-answer {
+            display: none;
+            margin-top: 8px;
+        }
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Часто задаваемые вопросы (FAQ)</h1>
+    <div class="faq-item">
+        <div class="faq-question">Как оформить заказ?</div>
+        <div class="faq-answer">
+            Выберите товар, добавьте его в корзину и перейдите к оформлению заказа, следуя инструкциям на экране.
+        </div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question">Какие способы оплаты доступны?</div>
+        <div class="faq-answer">
+            Мы принимаем оплату банковскими картами, электронными кошельками и наличными при получении.
+        </div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question">Можно ли вернуть товар?</div>
+        <div class="faq-answer">
+            Да, возврат возможен в течение 14 дней при сохранении товарного вида. Подробнее в разделе "Политика возврата".
+        </div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question">Как написать в Тех поддержку?</div>
+        <div class="faq-answer">
+           Вы можете с нами связатьcя  по ссылке <a href="xxxx.html">Тех поддержка</a>. Пожалуйста подробно опишите вашу проблему, чтобы мы смогли быстрее разобраться!
+           </div>
+      </div>
+    <div class="faq-item">
+        <div class="faq-question">Как подать заявку на Сотрудничество с нами?</div>
+        <div class="faq-answer">
+    Уважаемый клиент для того чтобы начать сотрудничать с нами нужно заполни эту форму <a href="x.html">Заявка на Сотрудничество</a>
+<strong>Примечание! Перед тем как сотрудничать с нами ознакомтесь с нашими требованиями</strong>
+        </div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question">Какие нужны требования чтобы подать заявку на сотрудничество с нами</div>
+        <div class="faq-answer">
+    <li><strong>Вы должны быть возрастом 18-ти лет и старше!</strong></li>
+    <li><strong>Быть адекватным и терпеливым, тк покупатели могут задавать глупые вопросы, и нужно иметь терпение!</strong></li>
+    <li><strong>Иметь опыт в продажах в любых других онлайн маркетплейсах!</strong></li>
+    <li><strong>Свободное время от 4 часов </strong></li>
+    <li><strong>Если вы подходите по всем критериям то  заполните форму <a href="x.html">Заявка на Сотрудничество</strong></li>
+    
+    <script>
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            item.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>

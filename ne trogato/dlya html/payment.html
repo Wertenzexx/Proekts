@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пополнение - Bloody</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { background: #0b0b0b; color: white; font-family: sans-serif; height: 100vh; display: flex; align-items: center; justify-content: center; }
+        .pay-card { background: #151515; padding: 30px; border-radius: 20px; border: 1px solid #e30707; width: 100%; max-width: 400px; text-align: center; }
+        h2 { color: #e30707; font-weight: 900; margin-bottom: 20px; }
+        .input-group-text { background: #e30707; border: none; color: white; }
+        .form-control { background: #222; border: 1px solid #333; color: white; }
+        .form-control:focus { background: #222; color: white; border-color: #e30707; box-shadow: none; }
+        .pay-btn { background: #e30707; border: none; width: 100%; padding: 12px; font-weight: bold; border-radius: 10px; margin-top: 15px; transition: 0.3s; }
+        .pay-btn:hover { background: #ff0000; transform: scale(1.02); }
+        .back { color: #555; text-decoration: none; display: block; margin-top: 15px; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+<div class="pay-card">
+    <h2>BLOODY PAY</h2>
+    <p>Введите сумму для пополнения баланса</p>
+    
+    <div class="input-group mb-3">
+        <span class="input-group-text">₽</span>
+        <input type="number" id="sum" class="form-control" placeholder="0.00">
+    </div>
+
+    <div class="d-flex justify-content-around mb-3">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Mir-logo.svg" height="20" style="filter: brightness(0) invert(1);">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" height="20" style="filter: brightness(0) invert(1);">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" height="20">
+    </div>
+
+    <button class="pay-btn" onclick="addMoney()">ПОПОЛНИТЬ</button>
+    <a href="index.html" class="back">отмена</a>
+</div>
+
+<script>
+    function addMoney() {
+        const val = parseInt(document.getElementById('sum').value);
+        if (val > 0) {
+            let balance = localStorage.getItem('balance') || 5000000;
+            localStorage.setItem('balance', Number(balance) + val);
+            alert('Счет успешно пополнен!');
+            window.location.href = 'index.html';
+        } else {
+            alert('Введите сумму!');
+        }
+    }
+</script>
+
+</body>
+</html>

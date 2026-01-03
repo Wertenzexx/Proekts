@@ -1,0 +1,15 @@
+/* Иконка "Избранное" */
+.favorite-icon {
+    color: #ffc107;         /* Желтый цвет для звезды */
+    font-size: 1.5rem;       /* Размер иконки */
+    position: relative;       /* Для позиционирования относительно заголовка */
+    top: -0.25rem;            /* Поднимаем иконку немного вверх */
+    margin-left: 0.5rem;      /* Отступ слева */
+    cursor: pointer;          /* Меняем курсор при наведении */
+    transition: transform 0.2s ease-in-out; /* Плавная анимация */
+}
+
+.favorite-icon:hover {
+    transform: scale(1.1);   /* Увеличиваем при наведении */
+}
+

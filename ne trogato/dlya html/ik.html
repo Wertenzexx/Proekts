@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Авторизация и регистрация</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+        }
+        
+        .auth-form {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        .auth-links {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .auth-links a {
+            color: #4CAF50;
+            text-decoration: none;
+            display: block;
+            margin: 10px 0;
+        }
+        
+        .auth-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .auth-message {
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .success {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+        
+        .error {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+        
+        .btn {
+            display: block;
+            padding: 10px;
+            margin: 10px 0;
+            text-align: center;
+            border-radius: 4px;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .vk {
+            background-color: #4a76a8;
+        }
+        
+        .telegram {
+            background-color: #0088cc;
+        }
+        
+        .google {
+            background-color: #db4437;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="auth-form" id="loginFormContainer">
+            <h2>Авторизация</h2>
+
+            <!-- Форма авторизации -->
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginUsername">Имя пользователя:</label>
+                    <input type="text" id="loginUsername" name="loginUsername" required>
+                    <div class="error-message" id="loginUsernameError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword">Пароль:</label>
+                    <input type="password" id="loginPassword" name="loginPassword" required>
+                    <div class="error-message" id="loginPasswordError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="loginCode">Код:</label>
+                    <input type="text" id="loginCode" name="loginCode" required>
+                    <div class="error-message" id="loginCodeError"></div>
+                </div>
+
+                <button type="submit">Войти</button>
+
+                <div class="auth-links">
+                    <a href="https://vk.com/feed" id="vkLoginLink" class="vk btn">Войти через VK</a>
+                    <a href="https://web.telegram.org/a/#5322384257" id="tgLoginLink" class="telegram btn">Войти через Telegram</a>
+                    <a href="https://www.google.ru" id="googleLoginLink" class="google btn">Войти через Google</a>
+                    <a href="#" id="getCodeButton">Получить код</a>
+                    <a href="#" id="forgotPasswordLink">Забыли пароль?</a>
+                    <a href="#" id="showRegisterFormLink">Регистрация</a>
+                </div>
+            </form>
+        </div>
+
+        <div class="auth-form" id="registerFormContainer" style="display: none;">
+            <h2>Регистрация</h2>
+
+            <!-- Форма регистрации -->
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="registerUsername">Имя пользователя:</label>
+                    <input type="text" id="registerUsername" name="registerUsername" required>
+                    <div class="error-message" id="registerUsernameError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="registerPassword">Пароль:</label>
+                    <input type="password" id="registerPassword" name="registerPassword" required>
+                    <div class="error-message" id="registerPasswordError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Подтвердите пароль:</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    <div class="error-message" id="confirmPasswordError"></div>
+                </div>
+
+                <button type="submit">Зарегистрироваться</button>
+
+                <div class="auth-links">
+                    <a href="#" id="showLoginFormLink">Уже есть аккаунт? Войти</a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Сообщение об ошибке/успехе -->
+        <div id="authMessage" class="auth-message"></div>
+    </div>
+
+    <script>
+        // Получаем элементы DOM
+        const loginFormContainer = document.getElementById('loginFormContainer');
+        const loginForm = document.getElementById('loginForm');
+        const registerFormContainer = document.getElementById('registerFormContainer');
+        const registerForm = document.getElementById('registerForm');
+        const showRegisterFormLink = document.getElementById('showRegisterFormLink');
+        const showLoginFormLink = document.getElementById('showLoginFormLink');
+        
+        // Элементы формы авторизации
+        const loginUsernameInput = document.getElementById('loginUsername');
+        const loginPasswordInput = document.getElementById('loginPassword');
+        const loginCodeInput = document.getElementById('loginCode');
+        const loginUsernameError = document.getElementById('loginUsernameError');
+        const loginPasswordError = document.getElementById('loginPasswordError');
+        const loginCodeError = document.getElementById('loginCodeError');
+        
+        // Элементы формы регистрации
+        const registerUsernameInput = document.getElementById('registerUsername');
+        const registerPasswordInput = document.getElementById('registerPassword');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        const registerUsernameError = document.getElementById('registerUsernameError');
+        const registerPasswordError = document.getElementById('registerPasswordError');
+        const confirmPasswordError = document.getElementById('confirmPasswordError');
+        
+        const authMessage = document.getElementById('authMessage');
+        const getCodeButton = document.getElementById('getCodeButton');
+        const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+
+        // Функция для показа сообщения
+        function showMessage(message, type) {
+            authMessage.textContent = message;
+            authMessage.className = `auth-message ${type}`;
+            authMessage.style.display = 'block';
+        }
+
+        // Функция для скрытия сообщения
+        function hideMessage() {
+            authMessage.style.display = 'none';
+        }
+
+        // Функция валидации поля
+        function validateField(input, errorElement, validationFn) {
+            const value = input.value.trim();
+            if (!validationFn(value)) {
+                errorElement.textContent = input.dataset.errorMessage || 'Неверный формат';
+                errorElement.style.display = 'block';
+                return false;
+            } else {
+                errorElement.textContent = '';
+                errorElement.style.display = 'none';
+                return true;
+            }
+        }
+
+        // Функции валидации
+        function isValidUsername(username) {
+            return username.length >= 3;
+        }
+
+        function isValidPassword(password) {
+            return password.length >= 6;
+        }
+
+        function isValidCode(code) {
+            return code.length === 4 && /^\d+$/.test(code);
+        }
+
+        function passwordsMatch(password, confirmPassword) {
+            return password === confirmPassword;
+        }
+
+        // Функция для генерации случайного 4-значного кода
+        function generateRandomCode() {
+            return Math.floor(1000 + Math.random() * 9000).toString();
+        }
+
+        // Функция для генерации случайного пароля
+        function generateRandomPassword(length = 8) {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return result;
+        }
+
+        // Обработчик отправки формы авторизации
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            hideMessage();
+
+            // Валидация полей
+            const isUsernameValid = validateField(loginUsernameInput, loginUsernameError, isValidUsername);
+            const isPasswordValid = validateField(loginPasswordInput, loginPasswordError, isValidPassword);
+            const isCodeValid = validateField(loginCodeInput, loginCodeError, isValidCode);
+
+            if (isUsernameValid && isPasswordValid && isCodeValid) {
+                simulateLogin();
+            }
+        });
+
+        // Обработчик отправки формы регистрации
+        registerForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            hideMessage();
+
+            // Валидация полей
+            const isUsernameValid = validateField(registerUsernameInput, registerUsernameError, isValidUsername);
+            const isPasswordValid = validateField(registerPasswordInput, registerPasswordError, isValidPassword);
+            const doPasswordsMatch = validateField(confirmPasswordInput, confirmPasswordError, 
+                (value) => passwordsMatch(registerPasswordInput.value, value));
+
+            if (isUsernameValid && isPasswordValid && doPasswordsMatch) {
+                simulateRegistration();
+            }
+        });
+
+        // Функция для имитации авторизации
+        function simulateLogin() {
+            setTimeout(() => {
+                const username = loginUsernameInput.value.trim();
+                const password = loginPasswordInput.value.trim();
+                const code = loginCodeInput.value.trim();
+
+                // Получаем зарегистрированного пользователя из localStorage
+                const registeredUser = localStorage.getItem('registeredUser');
+                const parsedUser = registeredUser ? JSON.parse(registeredUser) : null;
+
+                // Проверяем пользователя и пароль
+                if (parsedUser && parsedUser.username === username && parsedUser.password === password) {
+                    if (code) {
+                        showMessage('Авторизация успешна!', 'success');
+                        localStorage.setItem('isLoggedIn', 'true');
+                        localStorage.setItem('username', username);
+                        window.location.href = 'index.html';
+                    } else {
+                        showMessage('Пожалуйста, введите код подтверждения', 'error');
+                    }
+                } else {
+                    showMessage('Неверное имя пользователя или пароль.', 'error');
+                }
+            }, 1000);
+        }
+
+        // Функция для имитации регистрации
+        function simulateRegistration() {
+            setTimeout(() => {
+                const username = registerUsernameInput.value.trim();
+                const password = registerPasswordInput.value.trim();
+
+                // Сохраняем данные пользователя
+                const user = {
+                    username: username,
+                    password: password // В реальном приложении пароль должен хешироваться!
+                };
+                localStorage.setItem('registeredUser', JSON.stringify(user));
+
+                showMessage(`Регистрация прошла успешно! Добро пожаловать, ${username}!`, 'success');
+                
+                // Переключаемся на форму авторизации
+                showLoginForm();
+                
+                // Очищаем поля регистрации
+                registerUsernameInput.value = '';
+                registerPasswordInput.value = '';
+                confirmPasswordInput.value = '';
+            }, 1000);
+        }
+
+        // Обработчик для кнопки "Получить код"
+        getCodeButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            const code = generateRandomCode();
+            alert(`Ваш код подтверждения: ${code}`);
+        });
+
+        // Обработчик для ссылки "Забыли пароль?"
+        forgotPasswordLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            const newPassword = generateRandomPassword();
+            alert(`Ваш новый пароль: ${newPassword}\nПожалуйста, запишите его!`);
+            
+            // В реальном приложении здесь должна быть отправка пароля на email
+            // и обновление его в базе данных
+        });
+
+        // Функции для переключения между формами
+        function showRegisterForm() {
+            loginFormContainer.style.display = 'none';
+            registerFormContainer.style.display = 'block';
+            hideMessage();
+        }
+
+        function showLoginForm() {
+            loginFormContainer.style.display = 'block';
+            registerFormContainer.style.display = 'none';
+            hideMessage();
+        }
+
+        // Обработчики для переключения между формами
+        showRegisterFormLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            showRegisterForm();
+        });
+
+        showLoginFormLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            showLoginForm();
+        });
+
+        // Проверка состояния авторизации при загрузке страницы
+        window.addEventListener('DOMContentLoaded', function() {
+            if (localStorage.getItem('isLoggedIn') === 'true') {
+                window.location.href = 'ik.html';
+            }
+        });
+    </script>
+</body>
+</html>

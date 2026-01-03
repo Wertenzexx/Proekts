@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Избранное — Маркетплейс</title>
+  <style>
+    :root{
+      --bg:#f6f8fb; --card:#ffffff; --muted:#6b7280; --accent:#2563eb; --danger:#ef4444; --radius:12px;
+      --shadow: 0 6px 18px rgba(30,41,59,0.08);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter, Roboto, "Segoe UI", Arial, sans-serif;background:var(--bg);color:#0f172a}
+
+    header{background:linear-gradient(90deg,#2563eb33, #7c3aed22);padding:20px 24px;border-bottom:1px solid rgba(15,23,42,0.04);display:flex;align-items:center;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,#2563eb,#7c3aed);display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+    h1{font-size:18px;margin:0}
+    .controls{margin-left:auto;display:flex;gap:8px;align-items:center}
+    .btn{background:var(--accent);color:#fff;padding:9px 12px;border-radius:10px;border:none;cursor:pointer;font-weight:600}
+    .btn.ghost{background:transparent;color:var(--accent);border:1px solid rgba(37,99,235,0.12)}
+    .btn.danger{background:var(--danger)}
+
+    .container{max-width:1100px;margin:28px auto;padding:0 20px}
+
+    .meta{display:flex;align-items:center;gap:16px;margin-bottom:18px}
+    .meta .count{background:var(--card);padding:10px 14px;border-radius:999px;box-shadow:var(--shadow);font-weight:600}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+
+    .card{background:var(--card);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow);display:flex;gap:12px;align-items:flex-start}
+    .thumb{width:88px;height:88px;border-radius:10px;background:#f3f4f6;flex-shrink:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .thumb img{width:100%;height:100%;object-fit:cover}
+    .info{flex:1;display:flex;flex-direction:column;gap:8px}
+    .name{font-weight:700;color:#0f172a}
+    .desc{font-size:13px;color:var(--muted)}
+    .price{font-weight:700;color:#111827}
+    .actions{display:flex;gap:8px;margin-top:6px}
+    .actions button{padding:8px 10px;border-radius:9px;border:none;cursor:pointer}
+    .actions .add{background:linear-gradient(90deg,#2563eb,#7c3aed);color:white}
+    .actions .remove{background:#fff;border:1px solid rgba(15,23,42,0.06);color:var(--danger)}
+        .actions .edit{background:#fff;border:1px solid rgba(15,23,42,0.06);color:var(--muted)}
+
+    .empty{background:transparent;padding:36px;border-radius:12px;text-align:center;color:var(--muted)}
+
+    footer.nav{max-width:1100px;margin:24px auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center}
+    a.back-link{color:var(--muted);text-decoration:none;padding:10px 12px;border-radius:10px;border:1px solid rgba(15,23,42,0.04);background:white}
+
+    /* modal */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,0.45);z-index:999}
+    .modal .panel{width:420px;background:var(--card);border-radius:12px;padding:18px;box-shadow:var(--shadow)}
+    .field{display:flex;flex-direction:column;margin-bottom:10px}
+    .field label{font-size:13px;color:var(--muted);margin-bottom:6px}
+    .field input[type=text],.field input[type=file],.field textarea{padding:10px;border-radius:8px;border:1px solid #e6edf7;background:#fbfdff}
+    .row{display:flex;gap:8px}
+
+    @media (max-width:520px){.meta{flex-direction:column;align-items:flex-start}.controls{width:100%;justify-content:space-between}.modal .panel{width:92%}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">MP</div>
+      <div>
+        <h1>Избранное</h1>
+        <div style="font-size:13px;color:var(--muted)">Ваши сохранённые товары</div>
+      </div>
+    </div>
+    <div class="controls">
+      <button class="btn ghost" id="clearBtn" title="Очистить избранное">Очистить</button>
+      <button class="btn" id="toCartAll">Добавить всё в корзину</button>
+      <button class="btn ghost" id="openAdd">Добавить товар</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="meta">
+      <div class="count" id="favCount">0 товаров</div>
+    </div>
+
+    <section id="favorites" class="grid" aria-live="polite">
+      <!-- cards will be injected here -->
+    </section>
+
+    <div id="emptyState" class="empty" style="display:none">
+      <svg width="88" height="88" viewBox="0 0 24 24" fill="none" style="margin-bottom:12px"><path d="M3 6h18" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round"/><path d="M7 6v12a3 3 0 003 3h4a3 3 0 003-3V6" stroke="#e6edf7" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <div style="font-weight:600;margin-bottom:6px">Пусто</div>
+      <div style="color:var(--muted)">Вы ещё не добавили товары в избранное.</div>
+      <div style="margin-top:12px"><a class="back-link" href="index.html">Вернуться в каталог</a></div>
+    </div>
+  </main>
+
+  <footer class="nav">
+    <a class="back-link" href="index.html">← Назад в магазин</a>
+  </footer>
+
+  <!-- modal form for adding new favorite -->
+  <div class="modal" id="modal">
+    <div class="panel">
+      <h3 style="margin:0 0 8px 0">Добавить товар в избранное</h3>
+      <div class="field"><label>Название</label><input id="f_name" type="text" placeholder="Например, Кроссовки"></div>
+      <div class="field"><label>Описание</label><input id="f_desc" type="text" placeholder="Краткое описание"></div>
+      <div class="field"><label>Цена</label><input id="f_price" type="text" placeholder="4990"></div>
+      <div class="field"><label>URL изображения (внешний)</label><input id="f_image_url" type="text" placeholder="https://... (опционально)"></div>
+      <div class="field"><label>Или загрузить файл (jpg/png)</label><input id="f_image_file" type="file" accept="image/*"></div>
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px">
+        <button class="btn ghost" id="modalCancel">Отмена</button>
+        <button class="btn" id="modalSave">Сохранить</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function loadFavorites(){
+      try{const raw = localStorage.getItem('favorites'); if(!raw) return []; const parsed = JSON.parse(raw); return Array.isArray(parsed) ? parsed : []; }catch(e){console.error(e);return []}
+    }
+    function saveFavorites(arr){ localStorage.setItem('favorites', JSON.stringify(arr)); }
+    function loadCart(){ try{const raw=localStorage.getItem('cart');const p=raw?JSON.parse(raw):[];return Array.isArray(p)?p:[];}catch(e){return[]} }
+    function saveCart(arr){ localStorage.setItem('cart', JSON.stringify(arr)); }
+
+    function updateCount(n){ const el = document.getElementById('favCount'); el.textContent = n + (n % 10 === 1 && n !== 11 ? ' товар' : (n>=2 && n<=4 ? ' товара' : ' товаров')); }
+    function formatPrice(v){ if(v==null||v==='') return ''; try{ return typeof v === 'number' ? v.toLocaleString('ru-RU') + ' ₽' : (isNaN(Number(v)) ? v : Number(v).toLocaleString('ru-RU') + ' ₽'); }catch(e){return v} }
+
+    function render(){
+      const list = loadFavorites();
+      const wrap = document.getElementById('favorites');
+      const empty = document.getElementById('emptyState');
+      wrap.innerHTML = '';
+      updateCount(list.length);
+      if(list.length === 0){ empty.style.display = 'block'; return; } else { empty.style.display = 'none'; }
+
+      list.forEach(item => {
+        const card = document.createElement('article'); card.className = 'card';
+        const imgSrc = item.imageUrl || getPlaceholder(item.id);
+        card.innerHTML = `
+          <div class="thumb"><img src="${imgSrc}" alt="${(item.name||'Товар')}"></div>
+          <div class="info">
+            <div class="name">${escapeHtml(item.name || 'Без названия')}
+            </div>
+            <div class="desc">${escapeHtml(item.description || '')}</div>
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div class="price">${formatPrice(item.price)}</div>
+              <div class="actions">
+                <button class="add" data-id="${item.id}">Добавить в корзину</button>
+               
+                <button class="remove" data-id="${item.id}">Удалить</button>
+              </div>
+            </div>
+          </div>`;
+        wrap.appendChild(card);
+      });
+
+      // listeners
+      document.querySelectorAll('.card .add').forEach(btn => btn.addEventListener('click', e=>{ const id = e.currentTarget.getAttribute('data-id'); moveToCart(id);}));
+      document.querySelectorAll('.card .remove').forEach(btn => btn.addEventListener('click', e=>{ const id = e.currentTarget.getAttribute('data-id'); removeFromFavorites(id);}));
+      document.querySelectorAll('.card .edit').forEach(btn => btn.addEventListener('click', e=>{ const id = e.currentTarget.getAttribute('data-id'); openEditImage(id);}));
+    }
+
+    function getPlaceholder(id){ // use picsum with seeded id or data svg if id missing
+      try{
+        if(!id) return 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"></svg>';
+        const n = String(id).replace(/[^0-9]/g,'') || '1';
+        return 'https://picsum.photos/seed/'+encodeURIComponent(n)+'/400/400';
+      }catch(e){return ''}
+    }
+
+    function removeFromFavorites(id){ let arr = loadFavorites(); arr = arr.filter(x => String(x.id) !== String(id)); saveFavorites(arr); render(); }
+    function moveToCart(id){ const fav = loadFavorites(); const item = fav.find(x => String(x.id) === String(id)); if(!item) return; const cart = loadCart(); if(!cart.some(x=>String(x.id)===String(id))){ cart.push(item); saveCart(cart); } removeFromFavorites(id); toast('Добавлено в корзину'); }
+    function moveAllToCart(){ const fav = loadFavorites(); if(fav.length===0) return toast('Нет товаров для добавления'); const cart = loadCart(); fav.forEach(item=>{ if(!cart.some(x=>String(x.id)===String(item.id))) cart.push(item); }); saveCart(cart); saveFavorites([]); render(); toast('Все товары добавлены в корзину'); }
+    function clearFavorites(){ if(!confirm('Очистить всё избранное?')) return; saveFavorites([]); render(); }
+
+    function escapeHtml(s){ if(!s) return ''; return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+    function toast(msg){ const t=document.createElement('div'); t.textContent = msg; t.style.position='fixed'; t.style.right='18px'; t.style.bottom='18px'; t.style.background='rgba(17,24,39,0.92)'; t.style.color='white'; t.style.padding='10px 14px'; t.style.borderRadius='10px'; t.style.zIndex=9999; t.style.boxShadow='0 6px 20px rgba(2,6,23,0.3)'; document.body.appendChild(t); setTimeout(()=>{ t.style.transition='opacity 240ms'; t.style.opacity='0'; setTimeout(()=>t.remove(),250); },1500); }
+
+    // Modal behavior
+    const modal = document.getElementById('modal');
+    document.getElementById('openAdd').addEventListener('click', ()=>{ openModal(); });
+    document.getElementById('modalCancel').addEventListener('click', (e)=>{ e.preventDefault(); closeModal(); });
+    document.getElementById('modalSave').addEventListener('click', (e)=>{ e.preventDefault(); saveModal(); });
+
+    function openModal(){ document.getElementById('f_name').value=''; document.getElementById('f_desc').value=''; document.getElementById('f_price').value=''; document.getElementById('f_image_url').value=''; document.getElementById('f_image_file').value=''; modal.style.display='flex'; }
+    function closeModal(){ modal.style.display='none'; }
+
+    function saveModal(){ const name = document.getElementById('f_name').value.trim(); const desc = document.getElementById('f_desc').value.trim(); const price = document.getElementById('f_price').value.trim(); const url = document.getElementById('f_image_url').value.trim(); const fileInput = document.getElementById('f_image_file');
+      const favorites = loadFavorites();
+      const id = Date.now().toString();
+      if(fileInput.files && fileInput.files[0]){
+        const reader = new FileReader();
+        reader.onload = function(ev){ const dataUrl = ev.target.result; const item = {id, name, description: desc, imageUrl: dataUrl, price}; favorites.push(item); saveFavorites(favorites); closeModal(); render(); toast('Товар добавлен'); };
+        reader.readAsDataURL(fileInput.files[0]);
+      } else {
+        const imageUrl = url || getPlaceholder(id);
+        const item = {id, name, description: desc, imageUrl, price}; favorites.push(item); saveFavorites(favorites); closeModal(); render(); toast('Товар добавлен');
+      }
+    }
+
+    // edit image for existing item
+    function openEditImage(id){ const fileInput = document.createElement('input'); fileInput.type='file'; fileInput.accept='image/*'; fileInput.onchange = function(){ if(fileInput.files && fileInput.files[0]){ const reader = new FileReader(); reader.onload = function(ev){ const dataUrl = ev.target.result; let fav = loadFavorites(); fav = fav.map(x=>{ if(String(x.id)===String(id)){ x.imageUrl = dataUrl; } return x; }); saveFavorites(fav); render(); toast('Изображение обновлено'); }; reader.readAsDataURL(fileInput.files[0]); } }; fileInput.click(); }
+
+    // init
+    document.getElementById('clearBtn').addEventListener('click', clearFavorites);
+    document.getElementById('toCartAll').addEventListener('click', moveAllToCart);
+    render();
+
+    // allow adding from console with imageUrl by storing favorites objects with imageUrl property
+  </script>
+</body>
+</html>

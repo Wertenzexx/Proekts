@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard — Bloody</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --red: #e30707; --bg: #ffffff; --sidebar: #f8f9fa; --input: #f1f3f5; }
+        body { background: var(--bg); font-family: 'Inter', sans-serif; color: #333; overflow-x: hidden; }
+
+        /* Sidebar */
+        .sidebar { width: 280px; height: 100vh; background: var(--sidebar); position: fixed; border-right: 1px solid #eee; padding: 40px 20px; }
+        .main-content { margin-left: 280px; padding: 40px; }
+
+        .nav-link-custom { 
+            display: flex; align-items: center; padding: 14px 18px; border-radius: 12px; 
+            color: #555; text-decoration: none; font-weight: 600; margin-bottom: 8px; transition: 0.2s;
+        }
+        .nav-link-custom i { width: 25px; font-size: 1.1rem; }
+        .nav-link-custom:hover, .nav-link-custom.active { background: white; color: var(--red); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+
+        /* XP Bar */
+        .xp-container { background: #eee; height: 8px; border-radius: 10px; margin: 10px 0; overflow: hidden; }
+        .xp-fill { background: var(--red); height: 100%; transition: 0.5s; }
+
+        /* Cards */
+        .stat-card { background: var(--sidebar); border-radius: 20px; padding: 25px; border: 1px solid #eee; height: 100%; }
+        
+        .inv-item { 
+            background: #fff; border: 1px solid #eee; border-radius: 16px; padding: 12px; 
+            display: flex; align-items: center; gap: 15px; margin-bottom: 12px;
+        }
+        .inv-img { width: 60px; height: 60px; border-radius: 10px; object-fit: cover; }
+
+        /* Inputs */
+        .form-control { background: var(--input); border: none; padding: 12px; border-radius: 10px; font-weight: 500; }
+        .btn-red { background: var(--red); color: white; border: none; padding: 12px; border-radius: 10px; font-weight: 700; width: 100%; transition: 0.3s; }
+        .btn-red:hover { opacity: 0.8; transform: translateY(-2px); }
+        
+        .avatar-main { width: 100px; height: 100px; border-radius: 30px; object-fit: cover; border: 3px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+
+        /* Таблица входов */
+        .login-history-table { font-size: 0.85rem; width: 100%; }
+                .login-history-table th { color: #888; font-weight: 600; padding-bottom: 10px; }
+        .login-history-table td { padding: 8px 0; border-top: 1px solid #eee; }
+    </style>
+</head>
+<body>
+
+<div id="sidebar-app" class="sidebar">
+    <div class="text-center mb-5">
+        <img id="sideAvatar" src="https://via.placeholder.com/100" class="avatar-main mb-3">
+        <h5 id="sideName" class="fw-bold mb-0">...</h5>
+        <div class="small text-muted mb-3">Уровень <span id="userLvl">1</span></div>
+        <div class="xp-container"><div id="xpBar" class="xp-fill" style="width: 0%"></div></div>
+    </div>
+    
+    <div class="nav flex-column">
+        <a href="#" class="nav-link-custom active" onclick="switchTab('home', this)"><i class="fas fa-home"></i> Главная</a>
+        <a href="#" class="nav-link-custom" onclick="switchTab('inventory', this)"><i class="fas fa-box"></i> История покупок</a>
+        <a href="#" class="nav-link-custom" onclick="switchTab('wallet', this)"><i class="fas fa-wallet"></i> Кошелек</a>
+        <a href="#" class="nav-link-custom" onclick="switchTab('settings', this)"><i class="fas fa-cog"></i> Настройки</a>
+        <a href="index.html" class="nav-link-custom mt-5 text-danger"><i class="fas fa-sign-out-alt"></i> Выход</a>
+    </div>
+</div>
+
+<div class="main-content">
+    <!-- TAB: HOME -->
+    <div id="tab-home" class="tab-content">
+        <h2 class="fw-bold mb-4">Обзор профиля</h2>
+        <div class="row g-4">
+            <div class="col-md-3">
+                <div class="stat-card text-center">
+                    <div class="text-muted small fw-bold">БАЛАНС</div>
+                    <div class="h3 fw-bold text-danger mt-2" id="uiBalance">0 ₽</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card text-center">
+                    <div class="text-muted small fw-bold">ПОТРАЧЕНО</div>
+                    <div class="h3 fw-bold text-dark mt-2" id="uiTotalSpent">0 ₽</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card text-center">
+                    <div class="text-muted small fw-bold">ID АККАУНТА</div>
+                    <div class="h3 fw-bold mt-2" id="uiId">#000</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card text-center">
+                    <div class="text-muted small fw-bold">Мои покупки</div>
+                    <div class="h3 fw-bold mt-2" id="uiInvCount">0</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="stat-card mt-4">
+            <h5 class="fw-bold mb-3">Уведомления системы</h5>
+            <div class="p-3 mb-2 bg-white rounded-3 border small">
+                <i class="fas fa-shield-alt text-success me-2"></i> Безопасность: Ваш последний вход был зафиксирован успешно.
+            </div>
+            <div class="p-3 bg-white rounded-3 border small">
+                <i class="fas fa-gift text-danger me-2"></i> Акция: Используйте промокоды в разделе «Кошелек».
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB: INVENTORY -->
+    <div id="tab-inventory" class="tab-content d-none">
+        <h2 class="fw-bold mb-4">Ваша история покупок</h2>
+        <div id="invList" class="row"></div>
+    </div>
+
+    <!-- TAB: WALLET -->
+    <div id="tab-wallet" class="tab-content d-none">
+        <h2 class="fw-bold mb-4">Управление финансами</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="stat-card">
+                    <h5 class="fw-bold mb-4"><i class="fas fa-ticket-alt me-2 text-danger"></i> Промокод</h5>
+                    <input type="text" id="promoInput" class="form-control mb-3" placeholder="Введите код...">
+                    <button class="btn-red" onclick="applyPromo()">АКТИВИРОВАТЬ</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-card">
+                    <h5 class="fw-bold mb-4"><i class="fas fa-university me-2 text-danger"></i> Вывод средств</h5>
+                    <select id="withdrawMethod" class="form-control mb-2">
+                        <option value="Card">Банковская карта</option>
+                        <option value="Crypto">Криптовалюта (USDT)</option>
+                        <option value="QIWI">QIWI / ЮMoney</option>
+                    </select>
+                    <input type="number" id="withdrawAmount" class="form-control mb-3" placeholder="Сумма вывода">
+                    <button class="btn-red" style="background:#111" onclick="withdrawFunds()">СОЗДАТЬ ЗАЯВКУ</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-card">
+                    <h5 class="fw-bold mb-4"><i class="fas fa-exchange-alt me-2 text-danger"></i> Перевод</h5>
+                    <input type="text" class="form-control mb-2" placeholder="ID получателя">
+                    <input type="number" class="form-control mb-3" placeholder="Сумма">
+                    <button class="btn-red" style="background:#ccc; color:#666" disabled>В РАЗРАБОТКЕ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB: SETTINGS -->
+    <div id="tab-settings" class="tab-content d-none">
+        <h2 class="fw-bold mb-4">Настройки и Безопасность</h2>
+        <div class="row g-4">
+            <div class="col-md-5">
+                <div class="stat-card">
+                    <h5 class="fw-bold mb-3">Данные профиля</h5>
+                    <div class="mb-3">
+                        <label class="small fw-bold mb-2">Никнейм</label>
+                        <input type="text" id="setName" class="form-control">
+                    </div>
+                    <div class="mb-4">
+                        <label class="small fw-bold mb-2">URL Аватарки</label>
+                        <input type="text" id="setAv" class="form-control">
+                    </div>
+                    <button class="btn-red" onclick="saveSettings()">СОХРАНИТЬ</button>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="stat-card">
+                    <h5 class="fw-bold mb-3">История входов</h5>
+                    <table class="login-history-table">
+                        <thead>
+                            <tr>
+                                <th>Устройство</th>
+                                <th>IP Адрес</th>
+                                <th>Дата / Время</th>
+                            </tr>
+                        </thead>
+                        <tbody id="loginHistoryList">
+                            <!-- Данные из JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Инициализация истории входов при загрузке
+    function trackLogin() {
+        let user = JSON.parse(localStorage.getItem('bloody_user'));
+        if(!user) return;
+
+        const now = new Date();
+        const newLogin = {
+            device: navigator.userAgent.includes("Windows") ? "Windows PC" : "Mobile Device",
+            ip: "185.174." + (Math.floor(Math.random() * 255)) + "." + (Math.floor(Math.random() * 255)),
+            date: now.toLocaleDateString(),
+            time: now.toLocaleTimeString().slice(0, 5)
+        };
+
+        if(!user.loginHistory) user.loginHistory = [];
+        // Добавляем в начало и храним только последние 5
+        user.loginHistory.unshift(newLogin);
+        if(user.loginHistory.length > 5) user.loginHistory.pop();
+
+        localStorage.setItem('bloody_user', JSON.stringify(user));
+    }
+
+    function render() {
+        const user = JSON.parse(localStorage.getItem('bloody_user'));
+        if(!user) { window.location.href='index.html'; return; }
+
+        // Обновление текстов
+        document.getElementById('sideName').textContent = user.name;
+        document.getElementById('sideAvatar').src = user.avatar || 'https://via.placeholder.com/100';
+        document.getElementById('uiBalance').textContent = user.balance.toLocaleString() + " ₽";
+        document.getElementById('uiId').textContent = "#" + user.id;
+        document.getElementById('uiInvCount').textContent = user.inventory.length;
+        
+        // Расчет потраченных средств
+        const totalSpent = user.inventory.reduce((sum, item) => sum + item.price, 0);
+        document.getElementById('uiTotalSpent').textContent = totalSpent.toLocaleString() + " ₽";
+
+        // Заполнение настроек
+        document.getElementById('setName').value = user.name;
+        document.getElementById('setAv').value = user.avatar;
+
+        // Уровень
+        const lvl = Math.floor(user.xp / 100) + 1;
+        const progress = user.xp % 100;
+        document.getElementById('userLvl').textContent = lvl;
+        document.getElementById('xpBar').style.width = progress + "%";
+
+        // Рендер Инвентаря
+        const list = document.getElementById('invList');
+        list.innerHTML = user.inventory.length === 0 
+            ? "<div class='col-12 text-muted'>Ваша история покупок пуста.</div>" 
+            : user.inventory.map(i => `
+                <div class="col-md-6">
+                    <div class="inv-item">
+                        <img src="${i.img}" class="inv-img">
+                        <div class="flex-grow-1">
+                            <div class="fw-bold">${i.name}</div>
+                            <div class="small text-muted">${i.date}</div>
+                        </div>
+                        <div class="fw-bold text-danger">${i.price.toLocaleString()}₽</div>
+                    </div>
+                </div>
+            `).join('');
+
+        // Рендер Истории Входов
+        const historyList = document.getElementById('loginHistoryList');
+        historyList.innerHTML = (user.loginHistory || []).map(h => `
+            <tr>
+                <td><i class="fas fa-laptop me-2"></i>${h.device}</td>
+                <td class="text-muted">${h.ip}</td>
+                <td>${h.date} <span class="badge bg-light text-dark">${h.time}</span></td>
+            </tr>
+        `).join('');
+    }
+
+    function switchTab(tab, el) {
+        document.querySelectorAll('.tab-content').forEach(t => t.classList.add('d-none'));
+        document.querySelectorAll('.nav-link-custom').forEach(n => n.classList.remove('active'));
+        document.getElementById('tab-' + tab).classList.remove('d-none');
+        el.classList.add('active');
+    }
+
+    function withdrawFunds() {
+        const amount = Number(document.getElementById('withdrawAmount').value);
+        let user = JSON.parse(localStorage.getItem('bloody_user'));
+        
+        if(amount < 500) {
+            alert("Минимальная сумма вывода: 500₽");
+            return;
+        }
+        if(user.balance < amount) {
+            alert("Недостаточно средств!");
+            return;
+        }
+
+        user.balance -= amount;
+        localStorage.setItem('bloody_user', JSON.stringify(user));
+        alert("Заявка на вывод принята! Средства поступят в течение 24 часов.");
+        render();
+    }
+
+    function applyPromo() {
+        const code = document.getElementById('promoInput').value.trim();
+        let user = JSON.parse(localStorage.getItem('bloody_user'));
+        if(code === 'BLOODY2026') {
+            user.balance += 50000;
+            user.xp += 50; // Бонус к опыту
+            localStorage.setItem('bloody_user', JSON.stringify(user));
+            alert("Промокод применен! +50,000₽ и +50 XP");
+            document.getElementById('promoInput').value = "";
+            render();
+        } else {
+            alert("Неверный или уже использованный код!");
+        }
+    }
+
+    function saveSettings() {
+        let user = JSON.parse(localStorage.getItem('bloody_user'));
+        user.name = document.getElementById('setName').value;
+        user.avatar = document.getElementById('setAv').value;
+        localStorage.setItem('bloody_user', JSON.stringify(user));
+        alert("Настройки сохранены!");
+        render();
+    }
+
+    // Запуск при загрузке
+    trackLogin();
+    render();
+</script>
+</body>
+</html>

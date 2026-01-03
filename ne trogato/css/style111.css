@@ -1,0 +1,83 @@
+
+  
+
+   body { font-family: Arial, sans-serif; margin: 20px; background: #fafafa; }
+  #balance { font-size: 1.5em; margin-bottom: 20px; }
+  .products { display: flex; gap: 15px; margin-bottom: 40px; }
+  .product {
+    margin-top: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 15px;
+    width: 180px;
+    text-align: center;
+  }
+  .product h3 { margin: 0 0 10px; }
+  .product p { margin: 5px 0; }
+ 
+
+  /* Модальное окно */
+  #modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+  }
+
+
+
+  #cart {
+    background: #fff;
+    padding: 15px 20px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    max-width: 420px;
+  }
+  #cart h2 { margin-top: 0; }
+  #cartItems {
+    max-height: 180px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+  }
+  .cart-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  #totalPrice {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    text-align: right;
+  }
+  #payButton {
+    width: 100%;
+    background: #27ae60;
+  }
+  #payButton:disabled {
+    background: #a7d7b8;
+  }
+
+  button {
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            background-color: #007BFF;
+            border: none;
+            color: white;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        

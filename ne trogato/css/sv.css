@@ -1,0 +1,112 @@
+/* Общие стили (если их еще нет) */
+
+ body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            line-height: 1.5;
+        }
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Стили для отзывов */
+.reviews {
+    margin-top: 20px;
+}
+
+.review {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.review h3 {
+    margin-top: 0;
+    color: black;
+}
+
+.review p {
+    margin-bottom: 5px;
+     color: black;
+}
+
+/* Золотые звезды */
+.review p:nth-of-type(1) { /* Выбираем первый абзац (с оценкой) */
+    color: gold;
+    font-size: 1.2em; /* Сделаем звезды немного больше */
+}
+
+.review .date {
+    font-size: 0.8em;
+    color: #888;
+}
+
+.review .delete-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.review .delete-button:hover {
+    background-color: #da190b;
+}
+ textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            font-size: 1em;
+            box-sizing: border-box;
+            resize: vertical;
+ }
+  button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            background-color: #007BFF;
+            border: none;
+            color: white;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+            margin-top: 5px;
+        }
+         h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+         label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+            
+        }
+        select {
+            margin-top: 5px;
+            padding: 5px;
+            font-size: 1em;
+        }
+        .delete-btn:hover {
+            background-color: #a71d2a;
+        }
+
+        

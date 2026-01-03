@@ -1,0 +1,1064 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Маркетплейс — Bloody</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root{ --primary:#e30707; --bg:#f4f5f7; --card:#fff; --radius:10px; }
+        body{ background:var(--bg); font-family:Inter, Roboto, Arial, sans-serif; color:#222; }
+        .navbar{ background:#111; }
+        .navbar-brand{ color:var(--primary) !important; font-weight:700 }
+        .header-actions{ display:flex; gap:12px; align-items:center; }
+        #balanceValue{ color:#f10b0b; font-weight:700 }
+        main{ max-width:1200px; margin:30px auto; padding:0 16px; }
+        h1{ color:var(--primary); text-align:center; margin-bottom:24px }
+        .products-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap:20px; }
+        .product{ background:var(--card); border-radius:var(--radius); box-shadow:0 6px 20px rgba(0,0,0,0.06); overflow:hidden; display:flex; flex-direction:column }
+        .product-image{ width:100%; height:240px; object-fit:contain; background:#fafafa }
+        .discount-badge{ position:absolute; left:12px; top:12px; background:var(--primary); color:#fff; padding:6px 8px; border-radius:6px; font-weight:700 }
+        .like-button{ position:absolute; right:12px; top:12px; background:rgba(255,255,255,0.85); border-radius:50%; width:40px; height:40px; display:flex; align-items:center; justify-content:center; cursor:pointer }
+        .product-body{ padding:14px; display:flex; flex-direction:column; gap:10px; flex:1 }
+        .product-title{ color:var(--primary); font-size:1.2rem; font-weight:700 }
+        .product-description{ color:#6c757d; font-size:0.95rem }
+        .product-price{ margin-top:auto; display:flex; gap:8px; align-items:center; font-size:1rem }
+        .original-price{ text-decoration:line-through; color:#888 }
+        .discounted-price{ color:var(--primary); font-weight:700 }
+        .product-actions{ display:flex; gap:8px; padding:12px; }
+        .add-to-cart-btn{ flex:1; padding:10px; border-radius:8px; border:0; cursor:pointer }
+        .btn-buy{ background:#ffc107; color:#111 }
+        .btn-add{ background:#fff; border:1px solid #ddd }
+        .cart-badge{ background:var(--primary); color:#fff; border-radius:12px; padding:2px 8px; font-size:0.9rem }
+        @media(max-width:600px){ .product-image{ height:180px } }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid" style="max-width:1200px;margin:0 auto;">
+  <a class="navbar-brand" href="index.html"><i class="fas fa-gem"></i> Bloody</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navCollapse">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navCollapse">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link text-light" href="siklo.html">Регистрация</a></li>
+        
+<style>
+    $color-mode-type: data;
+
+@include color-mode(dark) {
+  .element {
+    color: var(--bs-primary-text-emphasis);
+    background-color: var(--bs-primary-bg-subtle);
+  }
+}
+</style>
+        <li class="nav-item"><a class="nav-link text-light" href="uu.html">Отзовик</a></li>
+        <li class="nav-item"><a class="nav-link text-light" href="help.html">ТП</a></li>
+
+      </ul>
+      <div class="header-actions ms-auto">
+        <!-- Контейнер баланса -->
+<div class="balance-container">
+  <a href="payment.html" class="btn btn-sm btn-outline-light my-wallet-btn">
+    <img src="wallet2.svg" class="wallet-img">
+    <span id="balanceValue" data-initial-balance="5000000">5 000 000₽</span>
+  </a>
+</div>
+<div class="admin-trigger">
+    <button class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#adminModal">
+        <i class="fas fa-user-shield"></i> Admin
+    </button>
+</div>
+<!-- ЭКРАН БАНА -->
+<div id="banOverlay">
+    <div class="ban-box">
+        <h1>BANNED</h1>
+        <p class="ban-info">Ваш доступ к маркетплейсу заблокирован</p>
+        <div class="ban-reason" id="displayReason">Причина: Нарушение правил</div>
+         <p class="ban-info">Вы можете обжаловать блокировку написав нам в <a href="help.html">Техническую поддержку</a></p>
+        <p class="ban-info">До разблокировки осталось:</p>
+        <div id="banTimer">00:00:00</div>
+        <p style="margin-top: 30px; font-size: 0.7rem; color: #444;">ID: SYSTEM_LOCK_BLOODY_V2</p>
+    </div>
+</div>
+<!-- MODAL ADMIN -->
+<div class="modal fade" id="adminModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-tools text-danger"></i> Bloody Management System</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <h6>Управление текущим пользователем (ВЫ)</h6>
+                <div class="user-row">
+                    <span>ID: <strong id="myId">User_777</strong></span>
+                    <div>
+                        <button class="btn btn-sm btn-danger" onclick="openBanModal('Self')">Забанить себя</button>
+                    </div>
+                </div>
+                
+                <hr>
+                <h6>Управление балансом</h6>
+                <div class="input-group mb-3">
+                    <input type="number" id="adminBalanceInput" class="form-control" placeholder="Сумма">
+                    <button class="btn btn-warning" onclick="updateBalance()">Установить баланс</button>
+                </div>
+
+                <hr>
+                <h6>Список пользователей сети (Имитация)</h6>
+                <div id="userList">
+                    <div class="user-row"><span>User_Dragon_99</span> <button class="btn btn-sm btn-outline-danger" onclick="openBanModal('User_Dragon_99')">Бан</button></div>
+                    <div class="user-row"><span>RichGuy_2026</span> <button class="btn btn-sm btn-outline-danger" onclick="openBanModal('RichGuy_2026')">Бан</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function addToFavorites(product) {
+    // 1. Получаем объект пользователя или создаем новый, если его нет
+    let user = JSON.parse(localStorage.getItem('bloody_user'));
+    
+    if (!user) {
+        user = { id: "777", name: "User_777", balance: 5000000, inventory: [], favorites: [] };
+    }
+
+    // 2. Проверяем, есть ли массив избранного
+    if (!user.favorites) user.favorites = [];
+
+    // 3. Проверяем, нет ли уже такого товара (по id)
+    const exists = user.favorites.some(f => f.id === product.id);
+
+    if (!exists) {
+        // Добавляем товар. Важно: используем ключ 'image', как в твоих кнопках
+        user.favorites.push({
+            id: product.id,
+            name: product.name,
+            price: product.price || 0,
+            image: product.image // Убедись, что тут именно image
+        });
+        
+        localStorage.setItem('bloody_user', JSON.stringify(user));
+        
+        // Если у тебя есть функция showToast — вызываем её, иначе alert
+        if (typeof showToast === "function") {
+            showToast("Товар добавлен в избранное!");
+        } else {
+            alert("Товар добавлен в избранное!");
+        }
+    } else {
+        if (typeof showToast === "function") {
+            showToast("Товар уже в избранном");
+        } else {
+            alert("Товар уже в избранном");
+        }
+    }
+}
+</script>
+
+<!-- MODAL BAN DETAILS -->
+<div class="modal fade" id="banActionModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content border-danger">
+            <div class="modal-header"><h5>Выдача блокировки</h5></div>
+            <div class="modal-body">
+                <p>Пользователь: <strong id="targetUser"></strong></p>
+                <label>Причина бана:</label>
+                <input type="text" id="banReason" class="form-control mb-3" placeholder="Напр: Мошенничество">
+                
+                <label>Срок бана:</label>
+                <select id="banDuration" class="form-select mb-3">
+                    <option value="0.01">1 минута (для теста)</option>
+                    <option value="1">1 час</option>
+                    <option value="24">24 часа</option>
+                    <option value="168">7 дней</option>
+                    <option value="87600">Навсегда</option>
+                </select>
+                
+                <button class="btn btn-danger w-100" onclick="applyBan()">ПОДТВЕРДИТЬ БАН</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+  // --- СИСТЕМА БАНА ---
+let selectedUser = "";
+
+function checkBan() {
+    const banData = JSON.parse(localStorage.getItem('bloody_ban_data'));
+    if (!banData) return;
+
+    const now = new Date().getTime();
+    if (now < banData.expiry) {
+        document.getElementById('banOverlay').style.display = 'flex';
+        document.getElementById('displayReason').textContent = "Причина: " + banData.reason;
+        
+        // Запуск таймера
+        const timerInterval = setInterval(() => {
+            const timeLeft = banData.expiry - new Date().getTime();
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                localStorage.removeItem('bloody_ban_data');
+                location.reload();
+            }
+            updateTimerUI(timeLeft);
+        }, 1000);
+    }
+}
+
+function updateTimerUI(ms) {
+    const hours = Math.floor(ms / (1000 * 60 * 60));
+    const mins = Math.floor((ms % (1000 * 60 * 60)) / (1000 * 60));
+    const secs = Math.floor((ms % (1000 * 60)) / 1000);
+    document.getElementById('banTimer').textContent = 
+        `${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+}
+
+function openBanModal(user) {
+    selectedUser = user;
+    document.getElementById('targetUser').textContent = user;
+    const myModal = new bootstrap.Modal(document.getElementById('banActionModal'));
+    myModal.show();
+}
+
+function applyBan() {
+    const reason = document.getElementById('banReason').value || "Нарушение условий платформы";
+    const hours = parseFloat(document.getElementById('banDuration').value);
+    const expiryTime = new Date().getTime() + (hours * 60 * 60 * 1000);
+
+    const banData = {
+        user: selectedUser,
+        reason: reason,
+        expiry: expiryTime
+    };
+
+    // Если админ банит "Себя" или "Текущего" - применяем мгновенно
+    if (selectedUser === 'Self' || selectedUser === 'User_777') {
+        localStorage.setItem('bloody_ban_data', JSON.stringify(banData));
+        location.reload();
+    } else {
+        alert(`Пользователь ${selectedUser} забанен в базе данных! (Эффект будет виден при его входе)`);
+    }
+}
+
+// --- УПРАВЛЕНИЕ БАЛАНСОМ ---
+function updateBalance() {
+    const amount = document.getElementById('adminBalanceInput').value;
+    if (amount !== "") {
+        localStorage.setItem('balance', amount);
+        renderUI();
+        alert("Баланс обновлен!");
+    }
+}
+
+function renderUI() {
+    const balance = localStorage.getItem('balance') || "5000000";
+    document.getElementById('balanceDisplay').textContent = Number(balance).toLocaleString() + "₽";
+}
+
+// Инициализация
+document.addEventListener('DOMContentLoaded', () => {
+    checkBan();
+    renderUI();
+});
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+  :root { --primary: #e30707; --bg: #fff9f9; --card: #161616; }
+        body { background: var(--bg); color: #eee; font-family: 'Inter', sans-serif; }
+
+        /* ЭКРАН БАНА */
+        #banOverlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, #200000 0%, #000 100%);
+            z-index: 10000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .ban-box {
+            background: rgba(0,0,0,0.8);
+            padding: 40px;
+            border: 2px solid var(--primary);
+            border-radius: 20px;
+            box-shadow: 0 0 50px rgba(227, 7, 7, 0.4);
+        }
+        .ban-box h1 { font-size: 3.5rem; color: var(--primary); font-weight: 900; margin-bottom: 20px; }
+        .ban-info { font-size: 1.2rem; margin-bottom: 10px; color: #ccc; }
+        .ban-reason { color: #fff; font-weight: bold; font-size: 1.5rem; margin: 20px 0; }
+        #banTimer { font-family: monospace; color: var(--primary); font-size: 2rem; }
+
+        /* СТИЛИ МАГАЗИНА */
+        .navbar { background: #000; border-bottom: 1px solid #222; }
+        .navbar-brand { color: var(--primary) !important; font-weight: 900; letter-spacing: 2px; }
+        .product-card { background: var(--card); border: 1px solid #222; border-radius: 15px; overflow: hidden; margin-bottom: 20px; transition: 0.3s; }
+        .product-card:hover { border-color: var(--primary); }
+        .price { color: #ffc107; font-weight: 800; font-size: 1.2rem; }
+        .btn-bloody { background: var(--primary); color: white; border: none; font-weight: 700; width: 100%; padding: 10px; border-radius: 8px; }
+
+        /* АДМИНКА */
+        .admin-trigger { position: fixed; bottom: 20px; left: 20px; opacity: 0.3; transition: 0.3s; z-index: 999; }
+        .admin-trigger:hover { opacity: 1; }
+        .modal-content { background: #1a1a1a; color: white; border: 1px solid var(--primary); }
+                .user-row { background: #222; padding: 10px; border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+        .form-control, .form-select { background: #333; border: 1px solid #444; color: white; }
+</style>
+
+<style>
+/* Основной контейнер */
+.balance-container {
+    position: relative;
+    /* Регулируй эти значения: */
+    left: -10px;    /* Минусовое значение = левее */
+    display: inline-block;
+    z-index: 100;
+}
+
+/* Стиль самой кнопки */
+.my-wallet-btn {
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
+    padding: 2px 10px;
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+
+
+</style>
+<div class="corzinal-container">
+        <a href="corzinal.html" class="btn btn-sm btn-outline-light"><img src="basket.svg" style="background-color: white; "><span id="cartCount" class="cart-badge">0</span></a>
+        </div>
+        
+        <style>
+          .corzinal-container {
+             position: relative;
+    /* Регулируй эти значения: */
+    left: -5px;    /* Минусовое значение = левее */
+    display: inline-block;
+    z-index: 100;
+          }
+        </style>
+        <div class="like-container" >
+        <a href="mr.html" class="btn btn-sm btn-outline-light">❤️</a>
+      </div>
+       <div class="action-icon" data-bs-toggle="offcanvas" data-bs-target="#profileMenu">
+             <button id="gotoProfileBtn" class="btn-profile-top">
+                <i class="fas fa-user-circle me-2"></i> КАБИНЕТ
+            </button>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+            <style>
+                 .btn-profile-top { background: var(--primary); color: white; border: none; padding: 8px 20px; border-radius: 10px; font-weight: 700; transition: 0.3s; }
+        .btn-profile-top:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(227, 7, 7, 0.3); color: white; }
+
+            </style>
+            <script>
+                if(!localStorage.getItem('bloody_user')) {
+    localStorage.setItem('bloody_user', JSON.stringify({
+        id: "random_randit(1,999)",
+        name: "User_777",
+        inventory: [],
+        regDate: "03.01.2026"
+
+    }));
+}
+// --- ПЕРЕХОД В ПРОФИЛЬ ---
+document.getElementById('gotoProfileBtn').addEventListener('click', () => {
+    const user = JSON.parse(localStorage.getItem('bloody_user'));
+    window.location.href = `profile.html?id=${user.id}`;
+});
+            </script>
+                <span id="msgBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="display:none">!</span>
+            </div>
+        </div>
+    </div>
+</nav>
+<main>
+   
+</script>
+<style>
+        
+        /* Кнопки интерфейса */
+        .btn-bloody { background: var(--primary); color: white; border: none; font-weight: bold; border-radius: 6px; transition: 0.3s; }
+        .btn-bloody:hover { background: var(--accent); transform: scale(1.02); }
+        .action-icon { color: white; border: 1px solid #333; padding: 8px 12px; border-radius: 8px; cursor: pointer; transition: 0.3s; position: relative; }
+        .action-icon:hover { border-color: var(--primary); color: var(--primary); }
+
+        /* Сетка товаров */
+        main { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 25px; }
+        .product-card { background: var(--card); border: 1px solid #222; border-radius: 15px; overflow: hidden; transition: 0.4s; position: relative; }
+        .product-card:hover { border-color: var(--primary); transform: translateY(-8px); box-shadow: 0 10px 30px rgba(255, 0, 0, 0.1); }
+        .product-img { width: 100%; height: 200px; object-fit: cover; border-bottom: 1px solid #222; }
+        .product-info { padding: 15px; }
+        .price-tag { color: #ffc107; font-weight: 800; font-size: 1.2rem; }
+
+        /* Профиль (Offcanvas) */
+        .offcanvas { background: #0a0a0a !important; color: white; border-left: 2px solid var(--primary); width: 450px !important; }
+        .profile-header { background: linear-gradient(to bottom, #200000, #0a0a0a); padding: 30px 20px; text-align: center; }
+                .avatar-lg { width: 100px; height: 100px; border-radius: 50%; border: 3px solid var(--primary); box-shadow: 0 0 20px var(--primary); }
+        
+        .nav-tabs { border: none; gap: 10px; }
+        .nav-tabs .nav-link { color: #666; border: none; font-weight: bold; }
+        .nav-tabs .nav-link.active { background: transparent; color: var(--primary); border-bottom: 2px solid var(--primary); }
+
+        /* Мессенджер */
+        .chat-container { height: 300px; overflow-y: auto; background: #000; border-radius: 10px; padding: 15px; border: 1px solid #222; }
+        .message { margin-bottom: 12px; padding: 8px 12px; border-radius: 10px; max-width: 85%; font-size: 0.9rem; }
+        .msg-in { background: #1a1a1a; border-left: 3px solid var(--primary); align-self: flex-start; }
+        .msg-out { background: var(--accent); align-self: flex-end; margin-left: auto; text-align: right; }
+
+        /* Формы */
+        .form-control { background: #151515; border: 1px solid #333; color: white; border-radius: 8px; }
+        .form-control:focus { background: #1a1a1a; color: white; border-color: var(--primary); box-shadow: none; }
+
+        /* Бан */
+        #banOverlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000; z-index:99999; flex-direction:column; justify-content:center; align-items:center; }
+</style>
+
+
+<main>
+  <h1>Список товаров</h1>
+  <div class="products-grid">
+
+    <div class="product">
+      <div style="position:relative">
+        <img class="product-image" src="seks.jpeg" alt="Сумка Bape">
+        <span class="discount-badge">-25%</span>
+        <div class="like-button" onclick="addToFavorites({id:'product1',name:'Сумка Bape',image:'seks.jpeg'})"><i class="fas fa-heart" style="color:#e30707"></i></div>
+      </div>
+      <div class="product-body">
+        <div class="product-title">Сумка Bape</div>
+        <div class="product-description">Вместительная, брендовая сумка. Вместимость до 50kg.</div>
+        <div class="product-price">
+          <div class="original-price">250 000₽</div>
+          <div class="discounted-price">187 500₽</div>
+        </div>
+      </div>
+      <div class="product-actions">
+        <button class="add-to-cart-btn btn-buy" data-product-id="product1" data-product-name="Сумка Bape" data-product-price="187500" data-product-image="seks.jpeg">Купить</button>
+        <button class="add-to-cart-btn btn-add" data-product-id="product1" data-product-name="Сумка Bape" data-product-price="187500" data-product-image="seks.jpeg">Добавить в корзину</button>
+      </div>
+    </div>
+
+    <div class="product">
+      <div style="position:relative">
+        <img class="product-image" src="okal.webp" alt="Толстовка Bape">
+        <span class="discount-badge">-30%</span>
+        <div class="like-button" onclick="addToFavorites({id:'product2',name:'Толстовка Bape',image:'okal.webp'})"><i class="fas fa-heart" style="color:#e30707"></i></div>
+      </div>
+      <div class="product-body">
+        <div class="product-title">Толстовка Bape</div>
+        <div class="product-description">Теплая, красивая толстовка от Bape.</div>
+        <div class="product-price">
+          <div class="original-price">30 000₽</div>
+          <div class="discounted-price">21 000₽</div>
+        </div>
+      </div>
+      <div class="product-actions">
+        <button class="add-to-cart-btn btn-buy" data-product-id="product2" data-product-name="Толстовка Bape" data-product-price="21000" data-product-image="okal.webp">Купить</button>
+        <button class="add-to-cart-btn btn-add" data-product-id="product2" data-product-name="Толстовка Bape" data-product-price="21000" data-product-image="okal.webp">Добавить в корзину</button>
+      </div>
+    </div>
+
+    <div class="product">
+      <div style="position:relative">
+        <img class="product-image" src="jjoooooj.jpg" alt="Кошелек Gucci">
+        <span class="discount-badge">-20%</span>
+        <div class="like-button" onclick="addToFavorites({id:'product3',name:'Кошелек Gucci',image:'jjoooooj.jpg'})"><i class="fas fa-heart" style="color:#e30707"></i></div>
+      </div>
+      <div class="product-body">
+        <div class="product-title">Кошелек Gucci</div>
+        <div class="product-description">Красивый кошелек из качественных материалов.</div>
+        <div class="product-price">
+          <div class="original-price">225 000₽</div>
+          <div class="discounted-price">180 000₽</div>
+        </div>
+      </div>
+      <div class="product-actions">
+        <button class="add-to-cart-btn btn-buy" data-product-id="product3" data-product-name="Кошелек Gucci" data-product-price="180000" data-product-image="jjoooooj.jpg">Купить</button>
+        <button class="add-to-cart-btn btn-add" data-product-id="product3" data-product-name="Кошелек Gucci" data-product-price="180000" data-product-image="jjoooooj.jpg">Добавить в корзину</button>
+      </div>
+    </div>
+
+    <div class="product">
+      <div style="position:relative">
+        <img class="product-image" src="tyk.jpg" alt="Кроссовки LV">
+        <span class="discount-badge">-15%</span>
+        <div class="like-button" onclick="addToFavorites({id:'product4',name:'Кроссовки LV',image:'tyk.jpg'})"><i class="fas fa-heart" style="color:#e30707"></i></div>
+      </div>
+      <div class="product-body">
+        <div class="product-title">Кроссовки LV</div>
+        <div class="product-description">Комфортные и стильные кроссовки из натуральной кожи.</div>
+        <div class="product-price">
+          <div class="original-price">3 000 000₽</div>
+          <div class="discounted-price">2 550 000₽</div>
+        </div>
+      </div>
+      <div class="product-actions">
+        <button class="add-to-cart-btn btn-buy" data-product-id="product4" data-product-name="Кроссовки LV" data-product-price="2550000" data-product-image="tyk.jpg">Купить</button>
+        <button class="add-to-cart-btn btn-add" data-product-id="product4" data-product-name="Кроссовки LV" data-product-price="2550000" data-product-image="tyk.jpg">Добавить в корзину</button>
+      </div>
+    </div>
+
+    <div class="product">
+      <div style="position:relative">
+        <img class="product-image" src="sra.jpg" alt="Часы Rolex">
+        <span class="discount-badge">-10%</span>
+        <div class="like-button" onclick="addToFavorites({id:'product5',name:'Часы Rolex',image:'sra.jpg'})"><i class="fas fa-heart" style="color:#e30707"></i></div>
+      </div>
+      <div class="product-body">
+        <div class="product-title">Часы Rolex</div>
+        <div class="product-description">Дорогие часы — символ статуса и стиля.</div>
+        <div class="product-price">
+          <div class="original-price">5 000 000₽</div>
+          <div class="discounted-price">4 500 000₽</div>
+        </div>
+      </div>
+      <div class="product-actions">
+        <button class="add-to-cart-btn btn-buy" data-product-id="product5" data-product-name="Часы Rolex" data-product-price="4500000" data-product-image="sra.jpg">Купить</button>
+        <button class="add-to-cart-btn btn-add" data-product-id="product5" data-product-name="Часы Rolex" data-product-price="4500000" data-product-image="sra.jpg">Добавить в корзину</button>
+      </div>
+    </div>
+
+    <div class="product">
+      <div style="position:relative">
+        <img class="product-image" src="sp.jpg" alt="Рюкзак Gucci" style="float: left">
+        <span class="discount-badge">-20%</span>
+        <div class="like-button" onclick="addToFavorites({id:'product6',name:'Рюкзак Gucci',image:'sp.jpg'})"><i class="fas fa-heart" style="color:#e30707"></i></div>
+      </div>
+      <div class="product-body">
+        <div class="product-title">Рюкзак Gucci (Женский)</div>
+        <div class="product-description">Городской рюкзак среднего размера, стильный и практичный.</div>
+        <div class="product-price">
+          <div class="original-price">144 000₽</div>
+          <div class="discounted-price">116 000₽</div>
+        </div>
+      </div>
+      <div class="product-actions">
+        <button class="add-to-cart-btn btn-buy" data-product-id="product6" data-product-name="Рюкзак Gucci (Женский)" data-product-price="116000" data-product-image="sp.jpg">Купить</button>
+        <button class="add-to-cart-btn btn-add" data-product-id="product6" data-product-name="Рюкзак Gucci (Женский)" data-product-price="116000" data-product-image="sp.jpg">Добавить в корзину</button>
+      </div>
+    </div>
+    <div class="product">
+      <div style="position:relative">
+        <img class="product-image" src="image/ima.jpeg" alt="Сумка Stone Island" style="float: left">
+        <span class="discount-badge">-10%</span>
+        <div class="like-button" onclick="addToFavorites({id:'product9',name:'Сумка Stone Island',image:'image/ima.jpeg'})"><i class="fas fa-heart" style="color:#e30707"></i></div>
+      </div>
+      <div class="product-body">
+        <div class="product-title">Сумка Stone Island</div>
+        <div class="product-description">Городской рюкзак среднего размера, стильный и практичный.</div>
+        <div class="product-price">
+          <div class="original-price">222 000₽</div>
+          <div class="discounted-price">200 000₽</div>
+        </div>
+      </div>
+      <div class="product-actions">
+        <button class="add-to-cart-btn btn-buy" data-product-id="product9" data-product-name="Сумка Stone Island" data-product-price="200000" data-product-image="image/ima.jpeg">Купить</button>
+        <button class="add-to-cart-btn btn-add" data-product-id="product9" data-product-name="Сумка Stone Island" data-product-price="200000" data-product-image="image/ima.jpeg">Добавить в корзину</button>
+      </div>
+    </div>
+    <div class="product">
+      <div style="position:relative">
+        <img class="product-image" src="sp.jpg" alt="Рюкзак Gucci" style="float: left">
+        <span class="discount-badge">-20%</span>
+        <div class="like-button" onclick="addToFavorites({id:'product6',name:'Рюкзак Gucci',image:'sp.jpg'})"><i class="fas fa-heart" style="color:#e30707"></i></div>
+      </div>
+      <div class="product-body">
+        <div class="product-title">Рюкзак Gucci (Женский)</div>
+        <div class="product-description">Городской рюкзак среднего размера, стильный и практичный.</div>
+        <div class="product-price">
+          <div class="original-price">144 000₽</div>
+          <div class="discounted-price">116 000₽</div>
+        </div>
+      </div>
+      <div class="product-actions">
+        <button class="add-to-cart-btn btn-buy" data-product-id="product6" data-product-name="Рюкзак Gucci (Женский)" data-product-price="116000" data-product-image="sp.jpg">Купить</button>
+        <button class="add-to-cart-btn btn-add" data-product-id="product6" data-product-name="Рюкзак Gucci (Женский)" data-product-price="116000" data-product-image="sp.jpg">Добавить в корзину</button>
+      </div>
+    </div>
+     <!-- Кнопка для открытия/закрытия чата -->
+    <button id="chatToggleButton">
+        <span id="toggleIcon"><img src="chat-text.svg"></span>
+    </button>
+
+    <!-- Контейнер чата -->
+    <div class="chat-container" id="chatContainer">
+        <div class="chat-header">
+            Бот Поддержки
+            <button class="close-btn" id="chatCloseButton">&times;</button>
+        </div>
+        <div class="chat-log" id="chatLog">
+            <!-- Сообщения будут добавляться сюда JS -->
+        </div>
+        <div class="options-container" id="optionsContainer">
+            <button id="restartButton" class="option-button">Начать сначала</button>
+        </div>
+    </div>
+    <script>
+        // Найти этот блок в твоем скрипте и заменить для корректной работы ссылок:
+
+document.getElementById('gotoProfileBtn').addEventListener('click', (e) => {
+    e.preventDefault(); // Предотвращаем стандартное поведение
+    const user = JSON.parse(localStorage.getItem('bloody_user'));
+    
+    // Проверяем, есть ли пользователь, если нет - создаем
+    if (!user) {
+        const newUser = { id: "777", name: "User_777", inventory: [] };
+        localStorage.setItem('bloody_user', JSON.stringify(newUser));
+        window.location.href = "profile.html?id=777";
+    } else {
+        // Переходим по относительному пути (будет работать на sleizy.com)
+        window.location.href = `profile.html?id=${user.id}`;
+    }
+});
+
+    </script>
+    <style>
+ /* --- Основной контент страницы --- */
+        .main-page-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        .main-page-content h1 {
+            color: #007bff;
+        }
+        .main-page-content p {
+            font-size: 1.1em;
+            line-height: 1.7;
+        }
+
+        /* --- Кнопка открытия чата --- */
+        #chatToggleButton {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.8em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            z-index: 1000;
+        }
+        #chatToggleButton:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+        }
+        #chatToggleButton.active {
+            transform: rotate(45deg);
+            background-color: #dc3545;
+        }
+
+        /* --- Контейнер чата --- */
+        .chat-container {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 380px;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 999;
+            transform: translateY(100%) scale(0.8);
+            opacity: 0;
+            visibility: hidden;
+                        transition: transform 0.3s ease-out, opacity 0.3s ease-out, visibility 0.3s ease-out;
+            transform-origin: bottom right;
+        }
+        .chat-container.open {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .chat-header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px 20px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chat-header .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .chat-log {
+            flex-grow: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background-color: #e9ecef;
+        }
+        .message-container { /* Новый контейнер для аватарки и текста */
+            display: flex;
+            align-items: flex-start; /* Выравнивание по верхнему краю */
+            margin-bottom: 10px;
+        }
+        .message {
+            max-width: 80%;
+            padding: 10px 14px;
+            border-radius: 18px;
+            line-height: 1.4;
+            word-wrap: break-word;
+            font-size: 0.95em;
+        }
+        .bot-message .message {
+            background-color: #ffffff;
+            border-bottom-left-radius: 4px;
+        }
+        .user-message .message {
+            background-color: #007bff;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+        .bot-avatar { /* Стили для аватарки */
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            margin-right: 10px;
+            object-fit: cover; /* Обрезать изображение по кругу */
+        }
+        .options-container {
+            padding: 15px 15px;
+            background-color: #f8f9fa;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            align-items: center;
+        }
+        .option-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 9px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85em;
+            transition: background-color 0.2s ease;
+            flex-shrink: 0;
+            white-space: nowrap;
+        }
+        .option-button:hover {
+            background-color: #0056b3;
+        }
+        #restartButton {
+            background-color: #6c757d;
+            margin-top: 10px;
+            font-size: 0.8em;
+            padding: 8px 15px;
+            width: calc(100% - 30px);
+        }
+        #restartButton:hover {
+            background-color: #5a6268;
+        }
+    </style>
+
+    <script>
+         // --- Сценарий разговора (без изменений) ---
+        const conversation = {
+            "start": {
+                text: "Привет! Я бот поддержки. Чем могу помочь?",
+                options: [
+                    { text: "Вопросы о продукте", next: "product_main" },
+                    { text: "Как зарегистрироваться?", next: "registration_main" },
+                    { text: "Техническая поддержка", next: "tech_main" },
+                    { text: "Контакты", next: "contacts_main" }
+                ]
+            },
+            "registration_main": {
+                text: "Что именно вас интересует по поводу регистрации?",
+                options: [
+                    { text: "Как создать аккаунт?", next: "registration_create" },
+                    { text: "Проблемы при регистрации", next: "registration_issues" },
+                    { text: "Какие данные нужны?", next: "registration_data_required" },
+                    { text: "Вернуться в главное меню", next: "start" }
+                ]
+            },
+            "registration_create": {
+                text: "Для регистрации перейдите по [ссылке на страницу регистрации] и заполните все обязательные поля. После этого подтвердите email или номер телефона.",
+                options: [
+                    { text: "Проблемы при регистрации", next: "registration_issues" },
+                    { text: "Вернуться к регистрации", next: "registration_main" },
+                    { text: "Вернуться в главное меню", next: "start" }
+                ]
+            },
+            "registration_issues": {
+                text: "Если у вас возникли проблемы, убедитесь, что вы заполнили все поля корректно и ваше интернет-соединение стабильно. Попробуйте использовать другой браузер или перезагрузить страницу. Если не поможет, свяжитесь с поддержкой.",
+                options: [
+                    { text: "Связаться с техподдержкой", next: "tech_escalate" },
+                    { text: "Вернуться к регистрации", next: "registration_main" },
+                    { text: "Вернуться в главное меню", next: "start" }
+                ]
+            },
+            "registration_data_required": {
+                text: "Обычно для регистрации требуются: email (или номер телефона), пароль, имя. В зависимости от сервиса, могут понадобиться дополнительные данные.",
+                options: [
+                    { text: "Как создать аккаунт?", next: "registration_create" },
+                    { text: "Вернуться к регистрации", next: "registration_main" },
+                    { text: "Вернуться в главное меню", next: "start" }
+                ]
+            },
+            "product_main": {
+                text: "Что вас интересует о продукте?",
+                options: [
+                    { text: "Функционал", next: "product_features" },
+                    { text: "Цены и тарифы", next: "product_pricing" },
+                    { text: "Как начать пользоваться?", next: "product_get_started" },
+                    { text: "Вернуться в главное меню", next: "start" }
+                ]
+            },
+            "product_features": {
+                text: "Наш продукт предоставляет следующие основные функции: [список функций]. Для более подробной информации посетите наш раздел 'Возможности' на сайте.",
+                options: [
+                    { text: "Посмотреть цены", next: "product_pricing" },
+                    { text: "Другие вопросы о продукте", next: "product_main" },
+                    { text: "Вернуться в главное меню", next: "start" }
+                ]
+            },
+            "product_pricing": {
+                text: "У нас есть несколько тарифных планов: Базовый, Профессиональный, Корпоративный. Детали и актуальные цены доступны на странице 'Тарифы'.",
+                options: [
+                    { text: "Ознакомиться с функционалом", next: "product_features" },
+                    { text: "Как начать пользоваться?", next: "product_get_started" },
+                    { text: "Вернуться в главное меню", next: "start" }
+                ]
+            },
+            "product_get_started": {
+                text: "Чтобы начать пользоваться продуктом, вам нужно [шаг 1], затем [шаг 2], и [шаг 3]. Если возникнут сложности, свяжитесь с нами.",
+                options: [
+                    { text: "Есть вопросы по установке", next: "tech_installation" },
+                    { text: "Вернуться в главное меню", next: "start" }
+                ]
+            },
+            "tech_main": {
+                text: "С чем связана техническая проблема?",
+                options: [
+                    { text: "Проблемы с установкой", next: "tech_installation" },
+                    { text: "Ошибка в работе приложения", next: "tech_app_error" },
+                    { text: "Сбой при подключении", next: "tech_connection" },
+                    { text: "Вернуться в главное меню", next: "start" }
+                ]
+            },
+            "tech_installation": {
+                text: "Убедитесь, что вы следуете инструкциям по установке [ссылка на инструкции]. Если проблема сохраняется, возможно, потребуется помощь специалиста. Нажмите 'Связаться с техподдержкой'.",
+                options: [
+                    { text: "Связаться с техподдержкой", next: "tech_escalate" },
+                    { text: "Вернуться в тех. поддержку", next: "tech_main" },
+                    { text: "Вернуться в главное меню", next: "start" }
+                ]
+            },
+            "tech_app_error": {
+                text: "Пожалуйста, опишите ошибку подробнее и предоставьте скриншоты, если возможно. Часто помогает перезапуск приложения или компьютера. Если нет, обратитесь в поддержку.",
+                options: [
+                    { text: "Связаться с техподдержкой", next: "tech_escalate" },
+                    { text: "Вернуться в тех. поддержку", next: "tech_main" },
+                    { text: "Вернуться в главное меню", next: "start" }
+                ]
+            },
+            "tech_connection": {
+                text: "Проверьте ваше интернет-соединение. Попробуйте перезапустить роутер. Если проблема остается, возможно, ваш провайдер блокирует порты или требуется настройка фаервола.",
+                options: [
+                    { text: "Связаться с техподдержкой", next: "tech_escalate" },
+                    { text: "Вернуться в тех. поддержку", next: "tech_main" },
+                    { text: "Вернуться в главное меню", next: "start" }
+                ]
+            },
+            "tech_escalate": {
+                text: "Для получения специализированной помощи, пожалуйста, напишите нам на сайте во вкладке `Тех Поддержка`, либо отправьте запрос на почту support@example.com или позвоните по телефону +7 (XXX) XXX-XX-XX.",
+                options: [
+                    { text: "Вернуться в главное меню", next: "start" }
+                ]
+            },
+            "contacts_main": {
+                text: "Вы можете связаться с нами по телефону +7 (XXX) XXX-XX-XX, по email info@example.com или через форму обратной связи на сайте [ссылка на форму].",
+                options: [
+                    { text: "Вернуться в главное меню", next: "start" }
+                ]
+            }
+        };
+
+        // --- Элементы DOM (без изменений) ---
+        const chatLog = document.getElementById('chatLog');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const restartButton = document.getElementById('restartButton');
+        const chatContainer = document.getElementById('chatContainer');
+        const chatToggleButton = document.getElementById('chatToggleButton');
+        const chatCloseButton = document.getElementById('chatCloseButton');
+        const toggleIcon = document.getElementById('toggleIcon');
+
+
+        let currentTopic = "start"; // Текущая тема разговора
+
+        // --- Функции ---
+
+        // Добавляет сообщение в лог чата
+        function displayMessage(sender, text) {
+            const messageContainer = document.createElement('div'); // Контейнер для аватарки и сообщения
+            messageContainer.classList.add('message-container');
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+
+            if (sender === 'bot') {
+                messageContainer.classList.add('bot-message');
+                // --- Аватарка ---
+                const avatarImg = document.createElement('img');
+                avatarImg.src = 'sig.webp'; // Путь к вашей аватарке (замените на свою ссылку)
+                avatarImg.alt = 'Аватар бота';
+                avatarImg.classList.add('bot-avatar');
+                messageContainer.appendChild(avatarImg);
+            } else {
+                messageContainer.classList.add('user-message');
+            }
+            
+            messageDiv.textContent = text;
+            messageContainer.appendChild(messageDiv);
+            chatLog.appendChild(messageContainer); // Добавляем контейнер, а не только сообщение
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+
+        // Отображает кнопки опций (без изменений)
+        function displayOptions(options) {
+            const existingRestartButton = document.getElementById('restartButton');
+            optionsContainer.innerHTML = '';
+            if (existingRestartButton) {
+                optionsContainer.appendChild(existingRestartButton);
+            }
+            options.forEach(option => {
+                const button = document.createElement('button');
+                button.classList.add('option-button');
+                button.textContent = option.text;
+                button.addEventListener('click', () => handleOptionClick(option));
+                optionsContainer.insertBefore(button, existingRestartButton);
+            });
+        }
+
+        // Обработка нажатия кнопки опции (без изменений)
+        function handleOptionClick(option) {
+            displayMessage('user', option.text);
+            currentTopic = option.next;
+            loadTopic(currentTopic);
+        }
+
+        // Загружает и отображает текущую тему разговора (без изменений)
+        function loadTopic(topicId) {
+            const topic = conversation[topicId];
+            if (!topic) {
+                console.error("Тема не найдена:", topicId);
+                displayMessage('bot', "Извините, произошла ошибка или тема не найдена. Попробуйте начать сначала.");
+                currentTopic = "start";
+                loadTopic(currentTopic);
+                return;
+            }
+            displayMessage('bot', topic.text);
+            displayOptions(topic.options);
+        }
+
+        // --- Обработчики открытия/закрытия чата (без изменений) ---
+        function toggleChat() {
+            chatContainer.classList.toggle('open');
+            chatToggleButton.classList.toggle('active');
+            toggleIcon.textContent = chatContainer.classList.contains('open') ? '×' : '+';
+            if (chatContainer.classList.contains('open') && chatLog.innerHTML === '') {
+                loadTopic(currentTopic);
+            }
+        }
+
+        chatToggleButton.addEventListener('click', toggleChat);
+        chatCloseButton.addEventListener('click', toggleChat);
+
+        // Кнопка "Начать сначала" (без изменений)
+        restartButton.addEventListener('click', () => {
+            chatLog.innerHTML = '';
+            currentTopic = "start";
+            loadTopic(currentTopic);
+        });
+   
+    </script>
+
+  </div>
+</main>
+
+<footer style="text-align:center;padding:30px;color:#666">
+  <small>© Bloody — Все права защищены</small>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// Общие функции: работа с localStorage корзины и балансом
+function formatCurrency(n){ return Number(n).toLocaleString('ru-RU') + '₽'; }
+function getCart(){ const raw = localStorage.getItem('cart'); return raw ? JSON.parse(raw) : []; }
+function saveCart(cart){ localStorage.setItem('cart', JSON.stringify(cart)); updateCartCount(); }
+function addToCart(product){ const cart = getCart(); cart.push(product); saveCart(cart); }
+
+function updateCartCount(){ const count = getCart().length; document.getElementById('cartCount').textContent = count; }
+
+// Add event listeners to buttons
+function initAddButtons(){ document.querySelectorAll('.add-to-cart-btn').forEach(btn=>{
+    btn.addEventListener('click', function(){
+        const id = this.dataset.productId;
+        const name = this.dataset.productName;
+        const price = Number(this.dataset.productPrice);
+        const image = this.dataset.productImage || '';
+        const product = { id,name,price,image };
+        addToCart(product);
+        // небольшая подсказка
+        this.textContent = 'Добавлено';
+        setTimeout(()=>{ this.textContent = this.classList.contains('btn-buy') ? 'Купить' : 'Добавить в корзину'; }, 900);
+    });
+}); }
+
+// Favorites
+function addToFavorites(product){ let fav = localStorage.getItem('favorites'); fav = fav ? JSON.parse(fav) : []; if(!fav.some(f=>f.id===product.id)){ fav.push(product); localStorage.setItem('favorites', JSON.stringify(fav)); alert(product.name + ' добавлен в избранное'); } else alert(product.name + ' уже в избранном'); }
+
+// Balance
+function getBalance(){ const b = localStorage.getItem('balance'); return b ? Number(b) : Number(document.getElementById('balanceValue').dataset.initialBalance); }
+function setBalance(v){ localStorage.setItem('balance', String(v)); document.getElementById('balanceValue').textContent = formatCurrency(v); }
+
+function initBalance(){ const val = getBalance(); document.getElementById('balanceValue').textContent = formatCurrency(val); document.getElementById('add-funds-btn').addEventListener('click', ()=>{
+    const amount = parseInt(prompt('Введите сумму пополнения, ₽')); if(!isNaN(amount) && amount>0){ setBalance(getBalance()+amount); alert('Баланс пополнен на ' + formatCurrency(amount)); }
+}); }
+
+// Инициализация
+document.addEventListener('DOMContentLoaded', ()=>{ updateCartCount(); initAddButtons(); initBalance(); });
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<div class="header-actions ms-auto">
+    <!-- Баланс в стиле кнопки корзины -->
+    <a href="payment.html" class="btn btn-sm btn-outline-light" style="display: flex; align-items: center; gap: 8px;">
+        <i class="fas fa-wallet" style="color: #ffc107; font-size: 1.1rem;"></i>
+        <span id="balanceValue" data-initial-balance="5000000">5 000 000₽</span>
+    </a>
+
+    <!-- Твоя корзина для сравнения (оставляем как есть) -->
+    <a href="corzinal.html" class="btn btn-sm btn-outline-light">
+        <img src="basket.svg" style="background-color: white; width: 18px; height: 18px; border-radius: 2px;">
+        <span id="cartCount" class="cart-badge">0</span>
+    </a>
+    
+    <a href="mr.html" class="btn btn-sm btn-outline-light">❤️</a>
+</div>
+<style>
+    /* Стиль контейнера иконки внутри кнопки, имитирующий твою картинку basket.svg */
+.wallet-icon-bg {
+    background-color: white;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px; /* Такой же как у твоей картинки */
+}
+
+/* Дополнительно застилизуем саму кнопку, чтобы она была аккуратной */
+.btn-outline-light {
+    border-color: rgba(255, 255, 255, 0.5);
+    transition: 0.3s;
+}
+
+.btn-outline-light:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: #fff;
+}
+</style>
